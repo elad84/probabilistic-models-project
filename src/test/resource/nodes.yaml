@@ -1,0 +1,11 @@
+- nodeId: 1
+  displayName: X1
+  domain:
+    - 0
+    - 1
+- nodeId: 2
+  displayName : X2
+  domain:
+    - 0
+    - 2
+    - 3

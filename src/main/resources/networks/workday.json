@@ -1,0 +1,199 @@
+[
+  {
+    "nodeId" : 1,
+    "displayName" : "X1",
+    "domain": [0, 1],
+    "conditionalTable": [
+      {
+        "nodeValue" : 0,
+        "probability" : 0.75
+      }
+    ]
+  },
+  {
+    "nodeId" : 2,
+    "displayName" : "X2",
+    "domain": [0, 1],
+    "dependencyList" : [1],
+    "conditionalTable" : [
+      {
+        "nodeValue" : 0,
+        "dependency" : [
+          {
+            "dependencyNodes" : [{"node" : 1, "value" : 0}],
+            "probability" : 0.8
+          },
+          {
+            "dependencyNodes" : [{"node" : 1, "value" : 1}],
+            "probability" : 0.2
+          }
+        ]
+      },
+      {
+        "nodeValue" : 1,
+        "dependency" : [
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 0}],
+            "probability" : 0.2
+          },
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 1}],
+            "probability" : 0.7
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nodeId" : 3,
+    "displayName" : "X3",
+    "domain": [0, 1],
+    "dependencyList" : [1],
+    "conditionalTable" : [
+      {
+        "nodeValue" : 0,
+        "dependency" : [
+          {
+            "dependencyNodes" : [{"node" : 1, "value" : 0}],
+            "probability" : 0.8
+          },
+          {
+            "dependencyNodes" : [{"node" : 1, "value" : 1}],
+            "probability" : 0.3
+          }
+        ]
+      },
+      {
+        "nodeValue" : 1,
+        "dependency" : [
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 0}],
+            "probability" : 0.2
+          },
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 1}],
+            "probability" : 0.7
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nodeId" : 4,
+    "displayName" : "X4",
+    "domain": [0, 1],
+    "dependencyList" : [3],
+    "conditionalTable" : [
+      {
+        "nodeValue" : 0,
+        "dependency" : [
+          {
+            "dependencyNodes" : [{"node" : 3, "value" : 0}],
+            "probability" : 0.5
+          },
+          {
+            "dependencyNodes" : [{"node" : 3, "value" : 1}],
+            "probability" : 0.1
+          }
+        ]
+      },
+      {
+        "nodeValue" : 1,
+        "dependency" : [
+          {
+            "dependencyNodes" : [{"node" : 3, "value" : 0}],
+            "probability" : 0.5
+          },
+          {
+            "dependencyNodes" : [{"node" : 3, "value" : 1}],
+            "probability" : 0.9
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nodeId" : 5,
+    "displayName" : "X5",
+    "domain": [0, 1],
+    "dependencyList" : [2],
+    "conditionalTable" : [
+      {
+        "nodeValue" : 0,
+        "dependency" : [
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 0}],
+            "probability" : 0.1
+          },
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 1}],
+            "probability" : 0.9
+          }
+        ]
+      },
+      {
+        "nodeValue" : 1,
+        "dependency" : [
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 0}],
+            "probability" : 0.9
+          },
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 1}],
+            "probability" : 0.1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nodeId" : 6,
+    "displayName" : "X6",
+    "domain": [0, 1],
+    "dependencyList" : [4,2],
+    "conditionalTable" : [
+      {
+        "nodeValue" : 0,
+        "dependency" : [
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 0}, {"node" : 4, "value" : 0}],
+            "probability" : 0.8
+          },
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 0}, {"node" : 4, "value" : 1}],
+            "probability" : 0.1
+          },
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 1}, {"node" : 4, "value" : 0}],
+            "probability" : 1.0
+          },
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 1}, {"node" : 4, "value" : 1}],
+            "probability" : 0.5
+          }
+        ]
+      },
+      {
+        "nodeValue" : 1,
+        "dependency" : [
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 0}, {"node" : 4, "value" : 0}],
+            "probability" : 0.2
+          },
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 0}, {"node" : 4, "value" : 1}],
+            "probability" : 0.9
+          },
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 1}, {"node" : 4, "value" : 0}],
+            "probability" : 0.0
+          },
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 1}, {"node" : 4, "value" : 1}],
+            "probability" : 0.5
+          }
+        ]
+      }
+    ]
+  }
+]

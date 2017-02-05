@@ -1,0 +1,50 @@
+[
+  {
+    "nodeId" : 1,
+    "displayName" : "X1",
+    "domain": [0, 1],
+    "dependencyList" : [2],
+    "conditionalTable" : [
+      {
+        "nodeValue" : 1,
+        "dependency" : [
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 0}],
+            "probability" : 0.8
+          },
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 1}],
+            "probability" : 0.1
+          },
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 2}],
+            "probability" : 0.1
+          }
+        ]
+      },
+      {
+        "nodeValue" : 1,
+        "dependency" : [
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 0}],
+            "probability" : 0.2
+          },
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 1}],
+            "probability" : 0.5
+          },
+          {
+            "dependencyNodes" : [{"node" : 2, "value" : 2}],
+            "probability" : 0.3
+          }
+        ]
+      }
+
+    ]
+  },
+  {
+    "nodeId" : 2,
+    "displayName" : "X2",
+    "domain": [0, 1, 2]
+  }
+]
