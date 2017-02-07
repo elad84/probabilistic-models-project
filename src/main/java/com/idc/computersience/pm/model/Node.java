@@ -14,6 +14,6 @@ public class Node {
     private Integer nodeId;
     private String displayName;
     private List<Double> domain;
-    private List<Integer> dependencyList;
+    private List<Integer> parentList;
     private List<NodeValueConditionalProb> conditionalTable;
 }

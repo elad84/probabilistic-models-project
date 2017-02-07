@@ -15,5 +15,5 @@ import java.util.List;
 public class NodeValueConditionalProb {
     private int nodeValue;
     private double probability;
-    private List<DepedencyProbability> dependency;
+    private List<DependencyProbability> dependency;
 }

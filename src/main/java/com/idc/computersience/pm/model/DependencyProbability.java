@@ -10,7 +10,7 @@ import java.util.List;
  * @author eladcohen
  */
 @Data
-public class DepedencyProbability {
+public class DependencyProbability {
     private List<DependencyNode> dependencyNodes;
     private double probability;
 }

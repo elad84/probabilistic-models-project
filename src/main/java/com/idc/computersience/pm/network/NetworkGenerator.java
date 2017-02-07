@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -39,8 +38,8 @@ public class NetworkGenerator {
 
             //create edges
             for(Node node : nodes){
-                if(node.getDependencyList() != null && !node.getDependencyList().isEmpty()){
-                    for(int dependency : node.getDependencyList()){
+                if(node.getParentList() != null && !node.getParentList().isEmpty()){
+                    for(int dependency : node.getParentList()){
                         Edge edge = Edge.newBuilder()
                                 .setNode1(node.getNodeId())
                                 .setNode2(dependency)
