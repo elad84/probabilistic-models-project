@@ -1,0 +1,183 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[document]{ragged2e}
+\usepackage{csquotes}
+\geometry{a4paper,total={170mm,257mm},left=20mm,top=20mm}
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\begin{document}
+    \begin{titlepage}
+        \begin{center}
+            \vspace*{1cm}
+            
+            \textbf{Probabalistic Models Project Proposal}
+            
+            \vspace{0.5cm}
+            
+            
+            \vspace{1.5cm}
+            
+            \vfill
+            
+            Final Project\\
+            
+            \vspace{0.8cm}
+            
+            
+            
+            Computer Science\\
+            IDC\\
+            \today
+            
+        \end{center}
+    \end{titlepage}
+
+    \textbf{Overview}\\
+    Create a tool for students to both learn and experiment in probabilistic models. The idea is to illustrate different aspects of probabilistic models, all is defined by the units presented in the scope section.
+    The tool is design to help from the basic understanding of dependencies for random variables, to running different algorithms on Bayesian networks.
+    This file is going to explain the scope and way to create a tool for students to run various probabilistic models described in this document. The tools is going to be assembled from the following components:
+    \begin{enumerate}
+        \item Visual representation of model
+        \item JSON representation for models
+        \item CLI command tool to run operation against a model and to see reports
+    \end{enumerate}
+
+    In the visualization part the user will have the ability to:
+    \begin{enumerate}
+        \item Define Bayesian network in a couple of steps:
+        \begin{enumerate}
+            \item Define all the different nodes. Where every node have a name and domain.
+            \item Define the dependencies between the nodes.
+        \end{enumerate}
+        At the end of this process the user is able to see a graph representing the network.
+        \item Run different algorithms on a Bayesian network such as elimination, message passing. And in addition run transformations such as to moralized graph 
+    \end{enumerate}
+
+    \vspace{0.5cm}
+
+    \textbf{Scope}
+    The tool is going to build from four units, where every unit will extend the capabilities of the former one:
+    \begin{enumerate}
+        \item Unit 1\\
+        This unit is the designed to learn the basics of probability modeling of data. After understanding the basics in probability, visualize
+        dependency in discrete random variables, and how those variables can be dependent or independent on other random variables.
+        \begin{enumerate}
+            \item Represents dependencies through directed graph. Create predefined examples of models to show dependency vs independence of RVs.
+            \item Represent Bayesian network through an directed acyclic graph
+            \item show conditional independence using D separation rules
+        \end{enumerate}
+        \item Unit 2\\
+        \begin{enumerate}
+            \item Covert graph representation of a model to moralized graph. Validate if graph is chordal or not
+            \item Convert moralized graph to factor graph
+        \end{enumerate}
+        \item Unit 3\\
+        \begin{enumerate}
+            \item Show elimination algorithm implementation on graphs
+            \item Find perfect elimination for tree. The perfect elimination can be found using the moralized graph from unit 2, validate if the graph is chordal or not.
+            \item Show message passing algorithm in graph representation. Display the marginal distribution tables of vertexes along the algorithm.
+        \end{enumerate}
+        \item Unit 4\\
+        \begin{enumerate}
+            \item Parameter inference through data in tree models
+        \end{enumerate}
+        \item Unit 5\\
+        \begin{enumerate}
+            \item Markov chain Monte Carlo algorithm
+        \end{enumerate}
+    \end{enumerate}
+
+
+    \textbf{Model Representation}\\
+    A model is represented using:
+    \vspace{0.1cm}
+    \begin{enumerate}
+        \item Random variables. Where every random variable can have:
+        \begin{enumerate}
+            \item Name (X)
+            \item Domain $\Omega$ where every x in $\Omega$ have the probability $P(X=x)$
+        \end{enumerate}
+    \end{enumerate}
+    Example for JSON file, representation of random variable\\
+    variable:\\
+            \-\quad - name: x1\\
+            \-\quad\quad   domain:\\
+            \-\quad\quad - 0\\
+            \-\quad\quad - 1\\
+            \-\quad - name: x2\\
+            \-\quad\quad   domain:\\
+            \-\quad\quad - 0\\
+            \-\quad\quad - 1\\
+            \-\quad\quad - 2\\
+    
+    \textbf{Visual Representation}\\
+    \begin{enumerate}
+        \item Represent Bayessian network using DAG. Represent all the nodes, with the direct edges from parents to node $P(X_v | X_{\pi_v})$
+        \item Represent the elimination algorithm for a Bayessian network. $f(x_{hidden})=P(x_{hidden},X_{observed})=\sum_{\forall x \in V}P(X_v|X_{\pi_v})$. This is designed to show the elimination algorithm step by step.\\
+        Setup:\\
+        \begin{enumerate}
+            \item Set all the nodes data and with the observed nodes value.
+            \item set the elimination order
+        \end{enumerate}
+        Initialization:\\
+        \begin{enumerate}
+            \item Set potential function for all the nodes $\Psi_{v \in V}$, where $\psi_v = P(X_v|X_{\pi_v})$
+            \item create a matrix $|V\setminus observed| X |\Psi|$ of all RVs associate with every potential function.
+            \item Set the list of elimination order of RVs in $X_{V\setminus (observed \cup infered)}$
+        \end{enumerate}
+        Elimination Loop:\\
+        \begin{enumerate}
+            \item $X_v$ is the next RV in the elimination order so $\Psi_v$ is the potential functions have RV in the matrix
+            \item $n(X_v)$ are the RVs that involved in one of the potential function in $\Psi_v$
+            \item set $m_v$ of all RVs in $n(X_v)$. So $m_v(n(X_v))=\sum_{X_v}\Psi_v$
+            \item replace $\Psi_v$ with $m_v$
+        \end{enumerate}
+        By setting up elimination order the user is able see the impact on the complexity.\\
+        Output of the run - the elimination step by step with potential matrix.
+
+        \item Convert Bayessian network to moralized graph. In this scenario the objective is to show how the operation is done step by step.
+
+        \item Message passing algorithm. Visual representation of the message passing. Step by step running of eliminate procedure
+
+        \item Factor Tree and message passing algorithm. Represent the conversion between a direct graph to the moralized version and then to factor graph
+    \end{enumerate}
+
+    \vspace{0.1cm}
+    \textbf{CLI tool}\\
+    \begin{enumerate}
+        \item Running elimination algorithm for given node setup with elimination order.\\
+        Command: eliminate \enquote{path to file} \enquote{elimination order for all the nodes}\\
+        Input:\\
+        \begin{enumerate}
+            \item JSON file path, representing the RVs, nodes and conditional tables for all nodes $P(X_v=x_v|X_{\pi_v}=x_{\pi_v})$.
+            \item elimination order of the nodes
+        \end{enumerate}
+        Output:\\
+        Joint probability $f(\overline{x_{infered}})=P(X_{infered},X_{observed})$\\
+
+        
+
+        \item Message passing algorithm in trees. Run only eliminate procedure.
+        Command: message passing \enquote{sync/async} \enquote{path to file} \enquote{elimination order for all the nodes}\\
+        Give the ability to run in two modes:\\
+        \begin{enumerate}
+            \item synchronous - eliminate one child of a node at a time
+            \item asynchronous - eliminate child nodes in parallel
+        \end{enumerate}
+        Message passing algorithm with compute marginal for all nodes. Run the procedures collect and distribute\\
+
+        \item Message passing with most probable joint assignment. The input is the same as the other message passing CLI arguments. The output in this case is maximum probability and the assignment.
+
+        \item Run message algorithm on poly tree. Given as input:\\
+        Command: message passing \enquote{sync/async} \enquote{path to file} \enquote{elimination order for all the nodes}\\
+        \begin{enumerate}
+            \item poly tree with nodes V and edges E
+            \item conditional tables for all nodes $P(X_v=x_v|X_{\pi_v}=x_{\pi_v})$
+        \end{enumerate}
+        Output:\\
+        Marginal distribution for all the nodes
+    \end{enumerate}
+
+    \vspace{0.5cm}
+    \textbf{Design}\\
+\end{document}
