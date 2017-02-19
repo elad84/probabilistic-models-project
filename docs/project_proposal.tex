@@ -42,6 +42,7 @@
         \item CLI command tool to run operation against a model and to see reports
     \end{enumerate}
 
+    \label{network defeniton}
     In the visualization part the user will have the ability to:
     \begin{enumerate}
         \item Define Bayesian network in a couple of steps:
@@ -53,6 +54,11 @@
         \item Run different algorithms on a Bayesian network such as elimination, message passing. And in addition run transformations such as to moralized graph 
     \end{enumerate}
 
+    \label{define conditional table}
+    The user is able to add conditional table for the nodes in an easy way. The user will be able to choose a node in the network defined in \ref{network defenition},
+    and the node will be highlighted and an empty conditional ditribution table will be presented, where the user is able to set the probability for every value of
+    the node given his parents $P(X_v|X_{\pi_v})$
+
     \vspace{0.5cm}
 
     \textbf{Scope}
@@ -62,9 +68,21 @@
         This unit is the designed to learn the basics of probability modeling of data. After understanding the basics in probability, visualize
         dependency in discrete random variables, and how those variables can be dependent or independent on other random variables.
         \begin{enumerate}
-            \item Represents dependencies through directed graph. Create predefined examples of models to show dependency vs independence of RVs.
-            \item Represent Bayesian network through an directed acyclic graph
-            \item show conditional independence using D separation rules
+            \item Represents dependencies through directed graph. Create predefined examples of models to show dependency vs independence of RVs.\\
+            The user will be able to create dependecy in the steps defined in \ref{network defeniton}, the UI will represent the dependency hierarchy.
+            \item Represent Bayesian network through an directed acyclic graph. To see how the defenition is done see \ref{network defeniton}\\
+            The graph representation is giving the user the ability to better understand the network with conditional table. To see how to add conditional table go to \ref{define conditional table}
+            \item show conditional independence using D separation rules. The rules are:\\
+            \begin{enumerate}
+                \item Path contains a node $w \in A$ and not both adges that touch w are incoming:
+                \begin{enumerate}
+                    
+                \end{enumerate}
+            \end{enumerate}
+            The D seperation is a general criteration for $X_v \independent X_u | X_A$. Where $X_A$ is a set of RVs need to condition on in order that v will be independed
+            from u.
+            The user is going to be able to choose two nodes, the tool is going to show id those nodes are depended or not using D seperation. If they are conditional
+            independent show the user all the paths that does not block depedency, otherwise show the path that block dependency.\\
         \end{enumerate}
         \item Unit 2\\
         \begin{enumerate}
