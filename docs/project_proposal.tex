@@ -2,6 +2,7 @@
 \usepackage{geometry}
 \usepackage[document]{ragged2e}
 \usepackage{csquotes}
+\usepackage{hyperref}
 \geometry{a4paper,total={170mm,257mm},left=20mm,top=20mm}
 \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
@@ -10,7 +11,7 @@
         \begin{center}
             \vspace*{1cm}
             
-            \textbf{Probabalistic Models Project Proposal}
+            \textbf{Probabilistic Models Project Proposal}
             
             \vspace{0.5cm}
             
@@ -42,7 +43,7 @@
         \item CLI command tool to run operation against a model and to see reports
     \end{enumerate}
 
-    \label{network defeniton}
+    \hypertarget{network_defeniton}{Network Definition}\\
     In the visualization part the user will have the ability to:
     \begin{enumerate}
         \item Define Bayesian network in a couple of steps:
@@ -54,9 +55,9 @@
         \item Run different algorithms on a Bayesian network such as elimination, message passing. And in addition run transformations such as to moralized graph 
     \end{enumerate}
 
-    \label{define conditional table}
-    The user is able to add conditional table for the nodes in an easy way. The user will be able to choose a node in the network defined in \ref{network defenition},
-    and the node will be highlighted and an empty conditional ditribution table will be presented, where the user is able to set the probability for every value of
+    \hypertarget{define conditional table}{ Define Conditional Table}
+    The user is able to add conditional table for the nodes in an easy way. The user will be able to choose a node in the network defined in \hyperlink{network definition}{network definition table},
+    and the node will be highlighted and an empty conditional distribution table will be presented, where the user is able to set the probability for every value of
     the node given his parents $P(X_v|X_{\pi_v})$
 
     \vspace{0.5cm}
@@ -69,29 +70,39 @@
         dependency in discrete random variables, and how those variables can be dependent or independent on other random variables.
         \begin{enumerate}
             \item Represents dependencies through directed graph. Create predefined examples of models to show dependency vs independence of RVs.\\
-            The user will be able to create dependecy in the steps defined in \ref{network defeniton}, the UI will represent the dependency hierarchy.
-            \item Represent Bayesian network through an directed acyclic graph. To see how the defenition is done see \ref{network defeniton}\\
-            The graph representation is giving the user the ability to better understand the network with conditional table. To see how to add conditional table go to \ref{define conditional table}
+            The user will be able to create dependency in the steps defined in \hyperlink{network_defeniton}{network definition section}, the UI will represent the dependency hierarchy.
+            \item Represent Bayesian network through an directed acyclic graph. To see how the definition is done see \hyperlink{network_defeniton}{network definition section}\\
+            The graph representation is giving the user the ability to better understand the network with conditional table. To see how to add conditional table go to \hyperlink{define conditional table}{define conditional table section}
             \item show conditional independence using D separation rules. The rules are:\\
             \begin{enumerate}
-                \item Path contains a node $w \in A$ and not both adges that touch w are incoming:
+                \item Path contains a node $w \in A$ and not both adages that touch w are incoming:
                 \begin{enumerate}
-                    
+                    \item $X_u \rightarrow x \rightarrow X_v$
+                    \item $X_u \leftarrow x \leftarrow X_v$
+                    \item $X_u \leftarrow x \rightarrow X_v$
                 \end{enumerate}
+                \item path contains a node $w\notin A$ with two incoming edges $X_u \rightarrow w \leftarrow X_v$
             \end{enumerate}
-            The D seperation is a general criteration for $X_v \independent X_u | X_A$. Where $X_A$ is a set of RVs need to condition on in order that v will be independed
+            The D separation is a general criterion for $X_v \independent X_u | X_A$. Where $X_A$ is a set of RVs need to condition on in order that v will be independent
             from u.
-            The user is going to be able to choose two nodes, the tool is going to show id those nodes are depended or not using D seperation. If they are conditional
-            independent show the user all the paths that does not block depedency, otherwise show the path that block dependency.\\
+            The user is going to be able to choose two nodes, the tool is going to show id those nodes are depended or not using D separation. If they are conditional
+            independent show the user all the paths that does not block dependency, otherwise show the path that block dependency.\\
         \end{enumerate}
+
+        \pagebreak
+
         \item Unit 2\\
         \begin{enumerate}
-            \item Covert graph representation of a model to moralized graph. Validate if graph is chordal or not
+            \item Covert graph representation of a model to moralized graph. Create an undirected version of the Bayesian network, where two RVs have an edge if $u \in n(X_v)$. Emphasize that nodes associated with a potential function form a clique in the graph.\\
+            \item Validate if graph is chordal or not
             \item Convert moralized graph to factor graph
         \end{enumerate}
         \item Unit 3\\
         \begin{enumerate}
-            \item Show elimination algorithm implementation on graphs
+            \item Show elimination algorithm implementation on graphs.
+            \begin{enumerate}
+                \item Show elimination in moralized graph. The user can choose an elimination order, the moralized graph will reflect how the elimination of a node creates new edges for the node neighbors (if needed).
+            \end{enumerate}
             \item Find perfect elimination for tree. The perfect elimination can be found using the moralized graph from unit 2, validate if the graph is chordal or not.
             \item Show message passing algorithm in graph representation. Display the marginal distribution tables of vertexes along the algorithm.
         \end{enumerate}
@@ -104,7 +115,6 @@
             \item Markov chain Monte Carlo algorithm
         \end{enumerate}
     \end{enumerate}
-
 
     \textbf{Model Representation}\\
     A model is represented using:
@@ -130,8 +140,8 @@
     
     \textbf{Visual Representation}\\
     \begin{enumerate}
-        \item Represent Bayessian network using DAG. Represent all the nodes, with the direct edges from parents to node $P(X_v | X_{\pi_v})$
-        \item Represent the elimination algorithm for a Bayessian network. $f(x_{hidden})=P(x_{hidden},X_{observed})=\sum_{\forall x \in V}P(X_v|X_{\pi_v})$. This is designed to show the elimination algorithm step by step.\\
+        \item Represent Bayesian network using DAG. Represent all the nodes, with the direct edges from parents to node $P(X_v | X_{\pi_v})$
+        \item Represent the elimination algorithm for a Bayesian network. $f(x_{hidden})=P(x_{hidden},X_{observed})=\sum_{\forall x \in V}P(X_v|X_{\pi_v})$. This is designed to show the elimination algorithm step by step.\\
         Setup:\\
         \begin{enumerate}
             \item Set all the nodes data and with the observed nodes value.
@@ -153,7 +163,7 @@
         By setting up elimination order the user is able see the impact on the complexity.\\
         Output of the run - the elimination step by step with potential matrix.
 
-        \item Convert Bayessian network to moralized graph. In this scenario the objective is to show how the operation is done step by step.
+        \item Convert Bayesian network to moralized graph. In this scenario the objective is to show how the operation is done step by step.
 
         \item Message passing algorithm. Visual representation of the message passing. Step by step running of eliminate procedure
 
