@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.12.10)  20 FEB 2017 21:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.12.10)  1 MAR 2017 11:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -302,40 +302,52 @@ LaTeX Info: Redefining \nameref on input line 9.
  [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 61.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 61.
+Overfull \hbox (88.97107pt too wide) in paragraph at lines 54--55
+[]\OT1/cmr/m/n/10 Kevin Mur-phy - Hid-den Markov Model Mat-lab im-ple-men-ta-ti
+on http://www.cs.ubc.ca/ mur-phyk/Software/HMM/hmm.html  
+ []
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.93 
-      [1] [2]
-Overfull \hbox (22.44298pt too wide) in paragraph at lines 184--185
+l.60 
+      [1]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 86.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 86.
+ [2] [3]
+Overfull \hbox (22.44298pt too wide) in paragraph at lines 211--212
 []\OT1/cmr/m/n/10 Message pass-ing al-go-rithm in trees. Run only elim-i-nate p
 ro-ce-dure. Com-mand: mes-sage pass-ing \  sync/async" 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 207.
-[3]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 207.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 234.
+[4]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 234.
  (./project_proposal.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 207.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 207.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 234.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 234.
 Package rerunfilecheck Info: File `project_proposal.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 5708 strings out of 493014
- 85832 string characters out of 6133350
- 188449 words of memory out of 5000000
+ 5723 strings out of 493014
+ 85929 string characters out of 6133350
+ 187449 words of memory out of 5000000
  9190 multiletter control sequences out of 15000+600000
  3948 words of font info for 15 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 29i,8n,28p,826b,446s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,8n,28p,826b,522s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{network\040definition} has been referenced but do
 es not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{CLI} has been referenced but does not exist, replac
+ed by a fixed one
+
+pdfTeX warning (dest): name{JSON} has been referenced but does not exist, repla
+ced by a fixed one
 
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
 /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
@@ -346,10 +358,10 @@ ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loc
 al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/
 texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/t
 exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on project_proposal.pdf (4 pages, 105997 bytes).
+Output written on project_proposal.pdf (5 pages, 109956 bytes).
 PDF statistics:
- 135 PDF objects out of 1000 (max. 8388607)
- 118 compressed objects within 2 object streams
- 61 named destinations out of 1000 (max. 500000)
+ 155 PDF objects out of 1000 (max. 8388607)
+ 137 compressed objects within 2 object streams
+ 76 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

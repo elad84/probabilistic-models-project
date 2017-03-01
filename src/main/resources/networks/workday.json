@@ -14,7 +14,7 @@
     "nodeId" : 2,
     "displayName" : "X2",
     "domain": [0, 1],
-    "dependencyList" : [1],
+    "parentList" : [1],
     "conditionalTable" : [
       {
         "nodeValue" : 0,
@@ -48,7 +48,7 @@
     "nodeId" : 3,
     "displayName" : "X3",
     "domain": [0, 1],
-    "dependencyList" : [1],
+    "parentList" : [1],
     "conditionalTable" : [
       {
         "nodeValue" : 0,
@@ -82,7 +82,7 @@
     "nodeId" : 4,
     "displayName" : "X4",
     "domain": [0, 1],
-    "dependencyList" : [3],
+    "parentList" : [3],
     "conditionalTable" : [
       {
         "nodeValue" : 0,
@@ -116,7 +116,7 @@
     "nodeId" : 5,
     "displayName" : "X5",
     "domain": [0, 1],
-    "dependencyList" : [2],
+    "parentList" : [2],
     "conditionalTable" : [
       {
         "nodeValue" : 0,
@@ -150,7 +150,7 @@
     "nodeId" : 6,
     "displayName" : "X6",
     "domain": [0, 1],
-    "dependencyList" : [4,2],
+    "parentList" : [4,2],
     "conditionalTable" : [
       {
         "nodeValue" : 0,
