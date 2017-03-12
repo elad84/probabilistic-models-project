@@ -3,6 +3,7 @@ package com.idc.computersience.pm.model.elimination;
 import com.idc.computersience.pm.model.Node;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.val;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,12 @@ public class PotentialFunction {
     }
 
     public void multiple(PotentialFunction potentialFunction){
+        val domain1 = node.getDomain();
+        val domain2 = potentialFunction.getNode().getDomain();
+
+
         node.getConditionalTable();
+        potentialFunction.getNode().getConditionalTable();
     }
 
 }
