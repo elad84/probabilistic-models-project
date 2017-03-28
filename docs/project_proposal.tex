@@ -40,13 +40,11 @@
 
     The main objective of this project is to develop a user-friendly software tool for constructing PGMs and experimenting with different aspects and inference algorithms. This tool will be designed both for educational use in academic courses and for self exploration by scientists and developers in the industry. This tool illustrates different aspects of probabilistic models in 6 different units:
     \begin{enumerate}
-        \item Unit 1 - conditional independence in Bayesian networks\\
-                Learn basic concepts in probabilistic models. Visual independence using Bayesian network, including D separation
-        \item Unit 2 - undirected representations of Bayesian networks\\
-                Objective is to see a different representation of Bayesian network
-        \item Unit 3 - elimination orders\\
-                Learn how to calculate joint probability for some nodes in Bayesian network, and marginal probability for some set of variables in the network
+        \item Unit 1 - conditional independence in Bayesian networks. Random variable independence through PGM, including conditional independence using D separation.
+        \item Unit 2 - undirected representations of Bayesian networks. Different representation of PGMs
+        \item Unit 3 - elimination orders. Learn how to calculate joint probability for some nodes in Bayesian network, and marginal probability for some set of variables in the network
         \item Unit 4 - inference algorithms
+                Inference of observed random variables by a set of inferred random variable
         \item Unit 5 - parameter inference
         \item Unit 6 - sampling algorithms on general Probabilistic Graphical Models
     \end{enumerate}
@@ -67,10 +65,62 @@
 
     \pagebreak
 
+    \textbf{Proposed Design}\\
+    As stated in the introduction the tool is build from 6 units, in this section we are going to elaborate on each one. Every unit extends the capabilities of the former unit.ֿֿ\\
+    Before we dive into every unit, let us define the basic capability this tool, give the user the ability to define a Bayesian network in two basic steps:
+    \begin{enumerate}
+        \item Define all nodes of the network that represent random variables
+        \item For every node the user is able to define it's parents. Where a node can have 0 or more parents
+    \end{enumerate}
+    This way the user is able to visual his network as a directed graph and explore it.
+    \begin{enumerate}
+        \item Unit 1\\
+        This unit is the designed to learn the basics of probabilistic models through a visual representation of Bayesian network, as a directed graph without the probability definition of every node.
+        \begin{enumerate}
+            \item Explore conditional independence, using D separation criteriation. The D separation is a general criterion for deciding from a given graph whether a set of variables X are independent of another set U given another set A. Or more formally: $X_V \independent X_U | X_A$.\\
+            The user is going to be able to choose two nodes to check independence for, and a set of nodes to condition on, all on the graph representation of Bayesian network. The tool is going to show if those nodes are independent. Highlight on the graph the paths that block dependency
+        \end{enumerate}
+
+        \vspace{0.5cm}
+
+        \item Unit 2\\
+        This unit objective is understanding the undirected graph representation of the Bayesian network. In the unit we are still not taking the probability of the nodes into consideration for all operations. 
+        \begin{enumerate}
+            \item 
+             In one click the user can convert the directed graph representation to an undirected graph, called the moralized graph. In this undirected representation parents of a node in the original graph will have a new edge between them. This emphasize the fact that all variables in the same conditional probability form a clique.
+            \item Validate if graph is chordal or not. The main characteristic of this graph is that every cycle of four or more vertices have a chord, in other words every included cycle in the graph should have exactly three vertices. This representation can help the user understand if perfect elimination exists or not in the for the next unit.
+            \item Convert moralized graph to factor graph. A bipartite graph representation with one class representing nodes in original graph and the other class representing maximal cliques.
+        \end{enumerate}
+        \item Unit 3\\
+            The main objective of this unit is to show calculation of joint and marginal probability of nodes in the graph representation . This unit does not show the actual calculation, but focus on implication of elimination. Still this unit refer to graph representation without referring to the probability table of every node.
+        \begin{enumerate}
+            \item Show elimination algorithm implementation on graphs. User can run elimination algorithm step by step. On every step the user choose a node to eliminate, on the graph the user can see the new edges added to the graph.
+            \item Try to find a prefect elimination order, choose one simplical node and start elimination from there, write the order on the screen, on every step find the next simplical node, if there is not such one, the user will be able to choose the next node to eliminate.
+        \end{enumerate}
+        \item Unit 4\\
+            In this unit the main objective is to show calculation of joint and marginal probability of random variables. The difference in the unit is here the probability tables are part of the calculation.
+            Show message passing algorithm in graph representation. The user can have the ability to run the algorithm to calculate:
+            \begin{enumerate}
+                \item Marginal distribution - calculates marginal distribution for every node
+                \item Max probability assignment - computes assignment of unobserved nodes with observed nodes 
+            \end{enumerate}
+            In addition the user has the ability to run in two execution modes: 
+            \begin{enumerate}
+                \item Full run, in this mode the algorithm runs and calculates marginal distribution for all nodes in the background. When the results are ready, the user is able to see marginal for a node by selecting that node
+                \item Step by step, on every step show marginal calculated for the node starting in root. This only applies to distribute step of the algorithm, still the collect part of the algorithm runs in single step.
+            \end{enumerate}
+        \item Unit 5 \\
+            Parameter inference through data in tree models
+        \item Unit 6\\
+        \begin{enumerate}
+            \item Markov chain Monte Carlo algorithm
+        \end{enumerate}
+    \end{enumerate}
+
     \textbf{Implementation Demo}
     \begin{figure}[h!]
         \includegraphics[width=\linewidth]{img/network_binary_matrix.png}
-        \caption{Bayesian network representation by DAG with binary matrix.}
+        \caption{Bayesian network representation by DAG with binary membership table.}
         \label{fig:besian_network}
     \end{figure}
 
@@ -79,150 +129,6 @@
         \caption{Bayesian network representation by DAG, after one node is chosen, show it's potential function table.}
         \label{fig:besian_network_chosen_node}
     \end{figure}
-    \vspace{0.5cm}
-
-    \textbf{Proposed Design}\\
-    As stated in the introduction the tool is build from 6 units, in this section we are going to elaborate on each one. Every unit extends the capabilities of the former unit.
-    \begin{enumerate}
-        \item Unit 1\\
-        This unit is the designed to learn the basics of probability modeling of data. After understanding the basics in probability, visualize
-        dependency in discrete random variables using a Bayesian network.
-        \begin{enumerate}
-            \item Use predefined Bayesian networks to illustrate dependence vs independence in random variables
-            \item Allow the user to define a Bayesian network, and define dependency between variables. The graph representation is giving the user the ability to better understand the network.
-            \item show conditional independence using D separation rules. The D separation is a general criterion for deciding from a given graph whether a set of variables X are independent of another set U given another set A. Or more formally: $X_V \independent X_U | X_A$.\\The rules are:\\
-            \begin{enumerate}
-                \item Path contains a node $w \in A$ and not both adages that touch w are incoming:
-                \begin{enumerate}
-                    \item $X_u \rightarrow x \rightarrow X_v$
-                    \item $X_u \leftarrow x \leftarrow X_v$
-                    \item $X_u \leftarrow x \rightarrow X_v$
-                \end{enumerate}
-                \item path contains a node $w\notin A$ with two incoming edges $X_u \rightarrow w \leftarrow X_v$
-            \end{enumerate}
-            The user is going to be able to choose two nodes, the tool is going to show id those nodes are depended or not using D separation. If they are conditional
-            independent show the user all the paths that does not block dependency, otherwise show the path that block dependency.\\
-        \end{enumerate}
-
-        \vspace{0.5cm}
-
-        \item Unit 2\\
-        This unit objective is understanding the undirected graph representation of the Bayesian network.
-        \begin{enumerate}
-            \item 
-             Covert graph representation of a model to moralized graph. This is an undirected representation every two variables in the same conditional table have an edge. Create an undirected version of the Bayesian network, where two RVs v u have an edge iff  $P(X_u | X_v) or P(X_v | X_u) or P(X_z | X_v, X_u) $. Emphasize that nodes associated with a potential function form a clique in the graph.\\
-            \item Validate if graph is chordal or not. The main characteristic of this graph is that every cycle of four or more vertices have a chord, in other words every included cycle in the graph should have exactly three vertices. 
-            \item Convert moralized graph to factor graph. A bipartite graph representation with one class representing nodes in original graph and the other class representing maximal cliques. As stated in this representation it is easier to see the maximal cliques in the graph.
-        \end{enumerate}
-        \item Unit 3\\
-            The main objective of this unit is to see inference 
-        \begin{enumerate}
-            \item Show elimination algorithm implementation on graphs.
-            \begin{enumerate}
-                \item Show elimination in moralized graph. The user can choose an elimination order, the moralized graph will reflect how the elimination of a node creates new edges for the node neighbors (if needed).
-            \end{enumerate}
-            \item Find perfect elimination for tree. The perfect elimination can be found using the moralized graph from unit 2, validate if the graph is chordal or not.
-            \item Show message passing algorithm in graph representation. Display the marginal distribution tables of vertexes along the algorithm.
-        \end{enumerate}
-        \item Unit 4\\
-        \begin{enumerate}
-            \item Parameter inference through data in tree models
-        \end{enumerate}
-        \item Unit 5\\
-        \begin{enumerate}
-            \item Markov chain Monte Carlo algorithm
-        \end{enumerate}
-    \end{enumerate}
-
-    \textbf{Model Representation}\\
-    A model is represented using:
-    \vspace{0.1cm}
-    \begin{enumerate}
-        \item Random variables. Where every random variable can have:
-        \begin{enumerate}
-            \item Name (X)
-            \item Domain $\Omega$ where every x in $\Omega$ have the probability $P(X=x)$
-        \end{enumerate}
-    \end{enumerate}
-    Example for JSON file, representation of random variable\\
-    variable:\\
-            \-\quad - name: x1\\
-            \-\quad\quad   domain:\\
-            \-\quad\quad - 0\\
-            \-\quad\quad - 1\\
-            \-\quad - name: x2\\
-            \-\quad\quad   domain:\\
-            \-\quad\quad - 0\\
-            \-\quad\quad - 1\\
-            \-\quad\quad - 2\\
-    
-    \textbf{Visual Representation}\\
-    \begin{enumerate}
-        \item Represent Bayesian network using DAG. Represent all the nodes, with the direct edges from parents to node $P(X_v | X_{\pi_v})$
-        \item Represent the elimination algorithm for a Bayesian network. $f(x_{hidden})=P(x_{hidden},X_{observed})=\sum_{\forall x \in V}P(X_v|X_{\pi_v})$. This is designed to show the elimination algorithm step by step.\\
-        Setup:\\
-        \begin{enumerate}
-            \item Set all the nodes data and with the observed nodes value.
-            \item set the elimination order
-        \end{enumerate}
-        Initialization:\\
-        \begin{enumerate}
-            \item Set potential function for all the nodes $\Psi_{v \in V}$, where $\psi_v = P(X_v|X_{\pi_v})$
-            \item create a matrix $|V\setminus observed| X |\Psi|$ of all RVs associate with every potential function.
-            \item Set the list of elimination order of RVs in $X_{V\setminus (observed \cup infered)}$
-        \end{enumerate}
-        Elimination Loop:\\
-        \begin{enumerate}
-            \item $X_v$ is the next RV in the elimination order so $\Psi_v$ is the potential functions have RV in the matrix
-            \item $n(X_v)$ are the RVs that involved in one of the potential function in $\Psi_v$
-            \item set $m_v$ of all RVs in $n(X_v)$. So $m_v(n(X_v))=\sum_{X_v}\Psi_v$
-            \item replace $\Psi_v$ with $m_v$
-        \end{enumerate}
-        By setting up elimination order the user is able see the impact on the complexity.\\
-        Output of the run - the elimination step by step with potential matrix.
-
-        \item Convert Bayesian network to moralized graph. In this scenario the objective is to show how the operation is done step by step.
-
-        \item Message passing algorithm. Visual representation of the message passing. Step by step running of eliminate procedure
-
-        \item Factor Tree and message passing algorithm. Represent the conversion between a direct graph to the moralized version and then to factor graph
-    \end{enumerate}
-
-    \vspace{0.1cm}
-    \textbf{CLI tool}\\
-    \begin{enumerate}
-        \item Running elimination algorithm for given node setup with elimination order.\\
-        Command: eliminate \enquote{path to file} \enquote{elimination order for all the nodes}\\
-        Input:\\
-        \begin{enumerate}
-            \item JSON file path, representing the RVs, nodes and conditional tables for all nodes $P(X_v=x_v|X_{\pi_v}=x_{\pi_v})$.
-            \item elimination order of the nodes
-        \end{enumerate}
-        Output:\\
-        Joint probability $f(\overline{x_{infered}})=P(X_{infered},X_{observed})$\\
-
-        
-
-        \item Message passing algorithm in trees. Run only eliminate procedure.
-        Command: message passing \enquote{sync/async} \enquote{path to file} \enquote{elimination order for all the nodes}\\
-        Give the ability to run in two modes:\\
-        \begin{enumerate}
-            \item synchronous - eliminate one child of a node at a time
-            \item asynchronous - eliminate child nodes in parallel
-        \end{enumerate}
-        Message passing algorithm with compute marginal for all nodes. Run the procedures collect and distribute\\
-
-        \item Message passing with most probable joint assignment. The input is the same as the other message passing CLI arguments. The output in this case is maximum probability and the assignment.
-
-        \item Run message algorithm on poly tree. Given as input:\\
-        Command: message passing \enquote{sync/async} \enquote{path to file} \enquote{elimination order for all the nodes}\\
-        \begin{enumerate}
-            \item poly tree with nodes V and edges E
-            \item conditional tables for all nodes $P(X_v=x_v|X_{\pi_v}=x_{\pi_v})$
-        \end{enumerate}
-        Output:\\
-        Marginal distribution for all the nodes
-    \end{enumerate}
 
     \vspace{0.5cm}
     \begin{thebibliography}{9}
