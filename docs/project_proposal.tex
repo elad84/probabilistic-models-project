@@ -1,145 +1,250 @@
 \documentclass{article}
+\usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{geometry}
 \usepackage[document]{ragged2e}
 \usepackage{csquotes}
 \usepackage{hyperref}
 \usepackage{graphicx}
-\geometry{a4paper,total={170mm,257mm},left=20mm,top=20mm}
+\usepackage{todonotes}
+\usepackage{enumitem}
+
+
+
+\newcommand{\comment}[2]{
+	\todo[color=GreenYellow,inline]{
+		\underline{\textbf{#1:}} #2
+	}}
+% \geometry{a4paper,total={170mm,257mm},left=20mm,top=20mm}
 \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\title{Bayesian Network Exploratory Tool}
+    % \today
+    \author{Elad Cohen}
 \begin{document}
-    \begin{titlepage}
-        \begin{center}
-            \vspace*{1cm}
-            
-            \textbf{Probabilistic Models Project Proposal}
-            
-            \vspace{0.5cm}
-            
-            
-            \vspace{1.5cm}
-            
-            \vfill
-            
-            Final Project\\
-            
-            \vspace{0.8cm}
+\maketitle
+    %\begin{titlepage}
+    %    \begin{center}
+    %       \vspace*{1cm}
+    %        
+    %        \textbf{Probabilistic Models Project Proposal}
+    %        
+    %        \vspace{0.5cm}
             
             
+    %        \vspace{1.5cm}
             
-            Computer Science\\
-            IDC\\
-            \today
+    %        \vfill
             
-        \end{center}
-    \end{titlepage}
-    \textbf{Intro}\\
-    Probabilistic Graphical Models (PGM) use a graph representation to describe complex distribution over high dimensional space. Where Every node in the graph correspond a random variable, and edges in the graph correspond to direct probabilistic interactions between variables. This representation is a set of in-dependencies holds in the distribution.\\
-    In high dimensional distribution the graph representation encode the probability in small factors rather then over every possible assignment of the variables, and the joined distribution defined as the a product of all these factors. In this kind of representation we can define Bayesian network and Markov network distributions in a visual way. Where the Bayesian network is represented as a directed graph and Markov as undirected graph.\\
-    This representation allow humans to better evaluate properties and semantics of a variables distribution, it can help understand unexplained or undesirable answers. In addition using the graph to analyses data, it is possible to run efficient algorithm to posterior probability of variables given the evidence of others. Another characteristic is learning from data model provides a good approximation of past experience.\\~\\
-
-    The main objective of this project is to develop a user-friendly software tool for constructing PGMs and experimenting with different aspects and inference algorithms. This tool will be designed both for educational use in academic courses and for self exploration by scientists and developers in the industry. This tool illustrates different aspects of probabilistic models in 6 different units:
+    %        Final Project\\
+            
+    %        \vspace{0.8cm}
+            
+            
+            
+    %        Computer Science\\
+    %        IDC\\
+    %        \today
+            
+    %    \end{center}
+    %\end{titlepage}
+    \section{Introduction}\label{sec:intro}
+    %\comment{Ilan}{Tightened 1st para. Notice that every sentence now contains a clear and short statement. Also moved focus to Bayesian Networks, rather than general PGMs, since most of what you propose has to do with directed graphs.}
+ %   Probabilistic Graphical Models (PGM) use a graph representation to describe complex distribution over high dimensional space. Where Every node in the graph correspond a random variable, and edges in the graph correspond to direct probabilistic interactions between variables. This representation is a set of in-dependencies holds in the distribution.\\
+ %   In high dimensional distribution the graph representation encode the probability in small factors rather then over every possible assignment of the variables, and the joined distribution defined as the a product of all these factors. In this kind of representation we can define Bayesian network and Markov network distributions in a visual way. Where the Bayesian network is represented as a directed graph and Markov as undirected graph.\\
+ %   This representation allow humans to better evaluate properties and semantics of a variables distribution, it can help understand unexplained or undesirable answers. In addition using the graph to analyses data, it is possible to run efficient algorithm to posterior probability of variables given the evidence of others. Another characteristic is learning from data model provides a good approximation of past experience.\\~\\
+ 
+    Probabilistic Graphical Models (PGM) are useful constructs for describing complex probability distributions over high dimensional space.
+    Bayesian networks are a common type of PGMs described using a directed graph, in which nodes correspond to random variables and edges correspond to direct dependencies between variables.
+    % This representation is a set of in-dependencies holds in the distribution.\\
+    The power of PGMs comes from the fact that they factor a large complex joint probability distribution into a product of much smaller probability tables.
+    The graph structure allows for an intuitive visual representation of the network of dependencies between variables.
+    Additionally, formulation of a high-dimensional probability distribution using PGMs enables efficient algorithms for inference from data, and even learning the underlying probability.
+ 
+%\comment{Ilan}{slightly refined para + tightened unit description}
+The main objective of this project is to develop a user-friendly software tool for constructing Bayesian networks that allows interactive exploration of different aspects and inference algorithms. This tool will be designed both for educational use in academic courses and for self exploration by scientists and developers in the industry. The proposed software tool will contain six main functional units (see Section \ref{sec:design} for more detailed description):
     \begin{enumerate}
-        \item Unit 1 - conditional independence in Bayesian networks. Random variable independence through PGM, including conditional independence using D separation.
-        \item Unit 2 - undirected representations of Bayesian networks. Different representation of PGMs
-        \item Unit 3 - elimination orders. Learn how to calculate joint probability for some nodes in Bayesian network, and marginal probability for some set of variables in the network
-        \item Unit 4 - inference algorithms
-                Inference of observed random variables by a set of inferred random variable
-        \item Unit 5 - parameter inference
-        \item Unit 6 - sampling algorithms on general Probabilistic Graphical Models
+        \item Unit 1 - conditional independence in Bayesian networks (D separation criterion).
+        \item Unit 2 - undirected representations of Bayesian networks and the concept of triangular (or chordal) graphs.
+        \item Unit 3 - elimination orders. Examine the influence of elimination order on the complexity of the underlying inference algorithm.
+        \item Unit 4 - inference algorithms. Inferring conditional distributions given observed data using elimination and message passing.
+        \item Unit 5 - parameter inference.
+        \item Unit 6 - sampling algorithms on Bayesian networks (MCMC, loopy belief propagation).
     \end{enumerate}
-    A more comprehensive explanation on every unit can be found in proposed design section. The tool designed to experiment basic understanding from dependencies of random variables, until running different algorithms on Bayesian networks.\\~\\
+    % These units are described in greater detail in Section \ref{sec:design} below. The tool designed to experiment basic understanding from dependencies of random variables, until % running different algorithms on Bayesian networks.\\~\\
 
-    In our research we came across a couple of libraries implements different algorithms on PGMs. Although those libraries have some aspects in common with our tool, we believe our tool helps to experiment in PGMs more gradually. Most of the libraries offer an efficient code, sometimes with visual representation, but not for learning purposes. Here is the list of tools:
+%\comment{Ilan}{need to organize this a bit more. You should describe the most relevant tools (I think ``Bayesian DAG learning'' and ``Probabilistic Graphical Models''), and list the features they support. Then in-line in the text you can mention other relevant tools. Also, use citations to connect a tool to its formal source, e.g., \cite{KevinMurphy}}
+    
+    There are several existing software tools for PGMs:
     \begin{enumerate}
-        \item Kevin Murphy - THe most comprehensive tool we found, an assemble of Matlab libraries implements various probabilistic models. Most of the libraries written by Kevin Murphy along with his students. Some of the libraries are:
-            \begin{enumerate}
-                \item PMTK - A collection of Matlab functions, written to support Kevin Murphy textbook ``Machine learning: a probabilistic perspective''.
-                \item DAG structure learning using L1 regularization - A library to find Markov blankets using L1
-                \item Bayesian DAG learning - Bayesian inference over DAG (directed acyclic graph). This library cannot handle undirected graphs and inference with hidden nodes.
-            \end{enumerate}
-        \item Hidden Markov Model Toolbox - Written By Kevin Murphy in 1998, support inference for HMMs (Hidden Markov Model), implemented on Matlab
-        \item OpenGM - A C++ Implementation for discrete factor graph models. The main objective of this library is to give efficient implementation, and not a learning experience.
-        \item Probabilistic Graphical Models - A Matlab implementation for inference and learning Bayesian and Markov networks hosted on Github. The library gives a code to learn PGM, but lack the visualization part.
-    \end{enumerate}
-
-    \pagebreak
-
-    \textbf{Proposed Design}\\
-    As stated in the introduction the tool is build from 6 units, in this section we are going to elaborate on each one. Every unit extends the capabilities of the former unit.ֿֿ\\
-    Before we dive into every unit, let us define the basic capability this tool, give the user the ability to define a Bayesian network in two basic steps:
-    \begin{enumerate}
-        \item Define all nodes of the network that represent random variables
-        \item For every node the user is able to define it's parents. Where a node can have 0 or more parents
-    \end{enumerate}
-    This way the user is able to visual his network as a directed graph and explore it.
-    \begin{enumerate}
-        \item Unit 1\\
-        This unit is the designed to learn the basics of probabilistic models through a visual representation of Bayesian network, as a directed graph without the probability definition of every node.
+        \item Bayesian DAG learning \cite{KevinMurphy} - Bayesian inference about directed acyclic graph (DAG) structures using dynamic programming and MCMC (Markov Chain Monte Carlo). This tool is free and it's written in Matlab. The main objective is to facilitate computation, designed to run on small amount of variables (up to 20). It's main features are:
         \begin{enumerate}
-            \item Explore conditional independence, using D separation criteriation. The D separation is a general criterion for deciding from a given graph whether a set of variables X are independent of another set U given another set A. Or more formally: $X_V \independent X_U | X_A$.\\
-            The user is going to be able to choose two nodes to check independence for, and a set of nodes to condition on, all on the graph representation of Bayesian network. The tool is going to show if those nodes are independent. Highlight on the graph the paths that block dependency
+            \item Computes exact edge marginals using Bayesian model averaging with dynamic programming
+            \item Computes edge marginals approximately using MCMC
+        \end{enumerate}
+        \item Probabilistic Graphical Models \cite{Probabilistic Graphical Model Library} - Inference of Bayesian networks and Markov chains. This tool includes learning examples as well. Implemented in Matlab with following features:
+        \begin{enumerate}
+            \item Joint distribution calculation
+            \item Marginal distribution calculation
+            \item Maximum probability assignment calculation
+            \item Inference on tree structured network
+        \end{enumerate}
+        Other relevant tools, e.g OpenGM \cite{OpenGM} (Discrete factor graph models), Hidden Markov Model Toolbox \cite{Hidden Markov Model Toolbox} ( Hidden Markov Model), MAP estimation of DAG structure \cite{MAPEstimation}, are more specialized and do not contain the main features of our proposed tool.
+        %\item Kevin Murphy - THe most comprehensive tool we found, an assemble of Matlab libraries implements various probabilistic models. Most of the libraries written by Kevin Murphy along with his students. Some of the libraries are:
+        %    \begin{enumerate}
+        %        \item PMTK - A collection of Matlab functions, written to support Kevin Murphy textbook ``Machine learning: a probabilistic perspective''.
+        %        \item DAG structure learning using L1 regularization - A library to find Markov blankets using L1
+        %        \item Bayesian DAG learning - Bayesian inference over DAG (directed acyclic graph). This library cannot handle undirected graphs and inference with hidden nodes.
+        %    \end{enumerate}
+        %\item Hidden Markov Model Toolbox - Written By Kevin Murphy in 1998, support inference for HMMs (Hidden Markov Model), implemented on Matlab
+        %\item OpenGM - A C++ Implementation for discrete factor graph models. The main objective of this library is to give efficient implementation, and not a learning experience.
+        %\item Probabilistic Graphical Models - A Matlab implementation for inference and learning Bayesian and Markov networks hosted on Github. The library gives a code to learn PGM, but lack the visualization part.
+    \end{enumerate}
+
+ 
+    Existing libraries have some aspects in common with our tool, but none of them appear to have the interactive nature that will support friendly exploration and learning. Additionally, none of these tools possess the gradual unit structure we propose, which we believe will help convey complex concepts in statistical learning.
+    
+    
+    \section{Proposed Design}\label{sec:design}
+    %\comment{Ilan}{Shortened here. Note that every sentence contains a succinct and clear statement. Minor statements can be removed.}
+    The software tool will consist of six sequential functional units. A Bayesian network is represented via a directed acyclic graph, where each node represents a random variable, with conditional distribution table given its parents (or predecessors) in the graph. The visual representation of the graph allows users to explore the network and observe the different conditional distribution tables.
+    
+    % Before we dive into every unit, let us define the basic capability this tool, give the user the ability to define a Bayesian network in two basic steps:
+    % \begin{enumerate}
+    %     \item Define all nodes of the network that represent random variables
+    %     \item For every node the user is able to define it's parents. Where a node can have 0 or more parents
+    % \end{enumerate}
+    % This way the user is able to visual his network as a directed graph and explore it.
+    \begin{enumerate}
+        \item Unit 1\label{unit1} -- 
+        % This unit is the designed to learn the basics of probabilistic models through a visual representation of Bayesian network, as a directed graph without the probability definition of every node.
+       fundamental concept of conditional independence in Bayesian networks. This unit considers only the graph structure of the network and ignores the probability tables.
+       %\comment{Ilan}{added marginal independence here. It's a special case, but you can mention it as a separate feature.}
+        \begin{enumerate}
+            \item Marginal independence. The user selects two nodes in the network, and the program specifies whether they are independent or not. If they are dependent, then the connecting path is highlighted.
+            \item Conditional independence. The user selects two nodes $u,v$ and a set of nodes to condition on $A$, and the program specifies whether $X_u$ and $X_v$ are conditionally independent given the collection $X_A$ ($X_V \independent X_U | X_A$). We will use the D-separation criterion for this and highlight the path that blocks dependence.
+            
+            %, using D separation criteriation. The D separation is a general criterion for deciding from a given graph whether a set of variables X are independent of another set U %given another set A. Or more formally: $X_V \independent X_U | X_A$.\\
+            %The user is going to be able to choose two nodes to check independence for, and a set of nodes to condition on, all on the graph representation of Bayesian network. The tool is going to show if those nodes are independent. Highlight on the graph the paths that block dependency
         \end{enumerate}
 
         \vspace{0.5cm}
-
-        \item Unit 2\\
-        This unit objective is understanding the undirected graph representation of the Bayesian network. In the unit we are still not taking the probability of the nodes into consideration for all operations. 
+%\comment{Ilan}{tweaked here. This was quite good!}
+        \item Unit 2\label{unit2} -- 
+%        This unit objective is understanding the undirected graph representation of the Bayesian network. In the unit we are still not taking the probability of the nodes into 
+%	 consideration for all operations. 
+        undirected graph representation of Bayesian networks.  This unit also considers only the graph structure of the network and ignores the probability tables.
         \begin{enumerate}
             \item 
-             In one click the user can convert the directed graph representation to an undirected graph, called the moralized graph. In this undirected representation parents of a node in the original graph will have a new edge between them. This emphasize the fact that all variables in the same conditional probability form a clique.
-            \item Validate if graph is chordal or not. The main characteristic of this graph is that every cycle of four or more vertices have a chord, in other words every included cycle in the graph should have exactly three vertices. This representation can help the user understand if perfect elimination exists or not in the for the next unit.
-            \item Convert moralized graph to factor graph. A bipartite graph representation with one class representing nodes in original graph and the other class representing maximal cliques.
+             %In one click the user can
+             Convert the directed graph representation to an undirected graph, called the moralized graph. In this undirected representation parents of a node in the original graph will have a new edge between them. %This emphasize the fact that
+             Consequently, all variables in the same conditional probability table form a clique.
+            \item %Validate if
+            Examine whether the moralized graph is chordal (triangulated) or not. %The main characteristic of this graph is that
+            In a chordal graph, every cycle of four or more vertices %have
+            has a chord. %, in other words every included cycle in the graph should have exactly three vertices. 
+            %This representation can help the user understand if 
+            Note that a perfect elimination exists, iff the moralized graph is chordal (see Unit 3).
+            \item Convert the moralized graph into a factor graph -- a bipartite graph representation with one class representing nodes in original graph and the other class representing maximal cliques (probability distribution tables).
         \end{enumerate}
-        \item Unit 3\\
-            The main objective of this unit is to show calculation of joint and marginal probability of nodes in the graph representation . This unit does not show the actual calculation, but focus on implication of elimination. Still this unit refer to graph representation without referring to the probability table of every node.
+        
+        
+%\comment{Ilan}{I stopped direct edits at this point. Please implement edits based on style of previous units.}
+ 
+ %\comment{Ilan}{we keep returning to this issue - unit 3 is about elimination orders. Not inference yet, and no use of actual probability tables. Please fix. I also think that you should specify two modes: one where the user iteratively selects nodes for elimination, and the other, where the program searches for a perfect order, until it gets stuck, and the user has to select the next node, etc.}
+        \item Unit 3\label{unit3} -- 
+            Elimination algorithm on undirected graph. Helps choose an elimination order for the purpose of inference without carrying out the complex computations of the probability tables.
         \begin{enumerate}
             \item Show elimination algorithm implementation on graphs. User can run elimination algorithm step by step. On every step the user choose a node to eliminate, on the graph the user can see the new edges added to the graph.
             \item Try to find a prefect elimination order, choose one simplical node and start elimination from there, write the order on the screen, on every step find the next simplical node, if there is not such one, the user will be able to choose the next node to eliminate.
         \end{enumerate}
-        \item Unit 4\\
-            In this unit the main objective is to show calculation of joint and marginal probability of random variables. The difference in the unit is here the probability tables are part of the calculation.
-            Show message passing algorithm in graph representation. The user can have the ability to run the algorithm to calculate:
+ %\comment{Ilan}{you can definitely add more details here. The user has to select the observed variables and the observed values. Then the program computes marginal probabilities or max-prob assignments. Also mention different modes of inference - simple elimination, message passing, parallel message passing. This is actually the unit that should be fleshed out the most, because it is the core of the program.}
+        \item Unit 4 --
+            Inference of hidden variables using observed variables. In this unit the main objective is to show calculation of joint, marginal and max probability of random variables. Show inference on graph representation (undirected, factor) of Bayesian network along with probability tables.\\
+
+            As first step the user selects the observed nodes on the network, for each one sets the node value (for elimination algorithm choose the nodes to inference).\\
+
+            Propose to the user three modes of inference:
+            \begin{enumerate}
+                \item Simple elimination - find marginal distribution for a set of variables given another set of observed variables.
+                \item Message Passing - compute marginal distribution for several variables separately given a set of observed variables.
+                \item Parallel Message Passing - same computation as in the last item but run the procedure in parallel (cannot run the step by step execution mode)
+            \end{enumerate}
+
+            Each one of the inference methods mentioned above can be run in one of the execution modes:
+            \begin{enumerate}
+                \item Full run, in this mode the algorithm runs the calculations in the background. When the results are ready, the user is able to see marginal for a node by selecting that node.
+                \item Step by step, on every step do a single algorithm calculation.
+            \end{enumerate}
+
+            Message passing algorithm is a special case were we can do different calculations on the graph representation. And it applies to both simple and parallel message passing. The user can have the ability to run the algorithm to calculate:
             \begin{enumerate}
                 \item Marginal distribution - calculates marginal distribution for every node
                 \item Max probability assignment - computes assignment of unobserved nodes with observed nodes 
             \end{enumerate}
-            In addition the user has the ability to run in two execution modes: 
+
+            %\comment{Elad}{Another thing i wanted to add (let me know if you think we need to add it): The user can choose to see algorithms run on undirected graph or factor graph representation of the Bayesian networks}
+        \item Unit 5 --
+            Parameter inference using observations. The networks this unit is operating on are HMM (Hidden Markov Model) and small Bayesian network with many independent copies.
+
+            The user has the ability to choose a couple of modes:
             \begin{enumerate}
-                \item Full run, in this mode the algorithm runs and calculates marginal distribution for all nodes in the background. When the results are ready, the user is able to see marginal for a node by selecting that node
-                \item Step by step, on every step show marginal calculated for the node starting in root. This only applies to distribute step of the algorithm, still the collect part of the algorithm runs in single step.
+                \item Inference where all nodes are observed. is data to sufficient statistics table and display it to the user.
+                \item Inference where some of the nodes are observed and some are hidden using:
+                \begin{enumerate}
+                    \item Maximum probability inference
+                    \item EM (expectation maximization) 
+                \end{enumerate}
             \end{enumerate}
-        \item Unit 5 \\
-            Parameter inference through data in tree models
-        \item Unit 6\\
+        \item Unit 6 --
+            Other advanced algoriths such as:
         \begin{enumerate}
             \item Markov chain Monte Carlo algorithm
+            \item Loopy Belief Propagation 
         \end{enumerate}
     \end{enumerate}
 
-    \textbf{Implementation Demo}
+    \section{Implementation Demo}\label{sec:demo}
+    For a demonstration of the tool, we constructed a network in the tool with 5 binary random variables, and added dependencies between them. Figure \ref{fig:besian_network}  demonstrate unit \ref{unit1}, the network as DAG in the tool. Since $X_4$ was clicked, it is highlighted and the conditional table $P(X_4|X_3)$ is shown.\\
+    Figure \ref{fig:binary_membership} shows the binary membership table. This table show a view of all nodes participant in probability function, and in addition shows all the probability functions a node participant in.\\
+    Figure \ref{fig:moralized_graph} shows an undirected version of the network with the binary membership table, which demonstrate unit \ref{unit2}.\\
+    Elimination of a node $X_4$ is demonstrated in \ref{fig:elimination}, we can see how one node is eliminated and there are new edges introduced in the undirected graph representation of the network. This demonstration for unit \ref{unit3} in our tool.
     \begin{figure}[h!]
-        \includegraphics[width=\linewidth]{img/network_binary_matrix.png}
-        \caption{Bayesian network representation by DAG with binary membership table.}
+        \includegraphics[width=\textwidth]{img/network_one_highlighted.png}
+        \centering
+        \caption{A simple Bayesian network representation using directed graph}
         \label{fig:besian_network}
     \end{figure}
 
     \begin{figure}[h!]
-        \includegraphics[width=\linewidth]{img/network_selected_node_table.png}
-        \caption{Bayesian network representation by DAG, after one node is chosen, show it's potential function table.}
-        \label{fig:besian_network_chosen_node}
+        \includegraphics[width=\linewidth]{img/network_binary_matrix.png}
+        \caption{Showing binary membership table of the network}
+        \label{fig:binary_membership}
     \end{figure}
 
-    \vspace{0.5cm}
-    \begin{thebibliography}{9}
-        \bibitem{Kevin Murphy}
-        Kevin Murphy and students libraries \\\texttt{http://www.cs.ubc.ca/\~{}murphyk/Software/}
+    \begin{figure}[h!]
+        \includegraphics[width=\linewidth]{img/moralized_graph.png}
+        \caption{Moralized Graph representation}
+        \label{fig:moralized_graph}
+    \end{figure}
+
+    \begin{figure}[h!]
+        \includegraphics[width=\linewidth]{img/after_x4_elimination.png}
+        \caption{After X4 is eliminated from the graph. We can see a new edge was created between X2 and X3. Now X5 node is chosen to be eliminated next}
+        \label{fig:elimination}
+    \end{figure}
+
+    \newpage
+    \begin{thebibliography}{5}
+        \bibitem{KevinMurphy}
+        Kevin Murphy, PGM Matlab libraries, \\\texttt{http://www.cs.ubc.ca/\~{}murphyk/Software/}
         \bibitem{Hidden Markov Model Toolbox}
-        Kevin Murphy toolbox for inference on Hidden Markov Models \\\texttt{http://www.cs.ubc.ca/\~{}murphyk/Software/HMM/hmm.html}
+        Kevin Murphy, toolbox for inference on Hidden Markov Models, \\\texttt{http://www.cs.ubc.ca/\~{}murphyk/Software/HMM/hmm.html}
         \bibitem{OpenGM}
-        OpenGM C++ library for discrete graph models \\\texttt{http://hciweb2.iwr.uni-heidelberg.de/opengm/}
+        Bjoern Andre, Thorsten Beier and Joerg H. Kappes, OpenGM, \\\texttt{http://hciweb2.iwr.uni-heidelberg.de/opengm/}
         \bibitem{Probabilistic Graphical Model Library} 
-        A code implementation of different aspects in PGMs
-        \\\texttt{https://github.com/anhncs/Probabilistic-Graphical-Models}
+        Syllogismos, PGM learning, \\\texttt{https://github.com/anhncs/Probabilistic-Graphical-Models}
+        \bibitem{MAPEstimation}
+        Mark Schmidt and Kevin Murphy, MAP estimation  of DAG structures, \\\texttt{http://www.cs.ubc.ca/~murphyk/Software/DAGlearn/index.html}
     \end{thebibliography}
 \end{document}
