@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.12.10)  7 APR 2017 20:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.12.10)  17 APR 2017 22:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -705,73 +705,84 @@ LaTeX Font Info:    External font `cmex10' loaded for size
  [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (0.53784pt too wide) in paragraph at lines 92--102
-\OT1/cmr/m/n/10 Other rel-e-vant tools, e.g OpenGM [[]] (Dis-crete fac-tor grap
-h mod-els), Hid-den Markov Model 
- []
-
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 125.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 125.
-[2] [3] <img/network_one_highlighted.png, id=87, 1445.4pt x 452.69125pt>
+ [2] [3]
+Overfull \hbox (4.37805pt too wide) in paragraph at lines 202--202
+\OT1/cmr/m/n/10 dis-tri-bu-tion ta-ble of vari-able ($\OML/cmm/m/it/10 X[]$\OT1
+/cmr/m/n/10 ) is dis-played when its ver-tex in the net-work is se-lected via m
+ouse 
+ []
+
+[4] <img/small_network.png, id=109, 372.39125pt x 250.9375pt>
+File: img/small_network.png Graphic file (type png)
+
+<use img/small_network.png>
+Package pdftex.def Info: img/small_network.png used on input line 222.
+(pdftex.def)             Requested size: 430.00462pt x 289.77051pt.
+
+<img/iterative_network.png, id=113, 983.675pt x 245.91875pt>
+File: img/iterative_network.png Graphic file (type png)
+
+<use img/iterative_network.png>
+Package pdftex.def Info: img/iterative_network.png used on input line 229.
+(pdftex.def)             Requested size: 430.00462pt x 107.50287pt.
+
+<img/parameterize_network_description.png, id=114, 1033.8625pt x 304.13625pt>
+File: img/parameterize_network_description.png Graphic file (type png)
+
+<use img/parameterize_network_description.png>
+Package pdftex.def Info: img/parameterize_network_description.png used on input
+ line 235.
+(pdftex.def)             Requested size: 430.00462pt x 126.49727pt.
+
+<img/network_one_highlighted.png, id=115, 1445.4pt x 452.69125pt>
 File: img/network_one_highlighted.png Graphic file (type png)
 
 <use img/network_one_highlighted.png>
-Package pdftex.def Info: img/network_one_highlighted.png used on input line 213
+Package pdftex.def Info: img/network_one_highlighted.png used on input line 243
 .
 (pdftex.def)             Requested size: 430.00462pt x 134.67558pt.
 
-<img/network_binary_matrix.png, id=89, 1440.38126pt x 440.64626pt>
+<img/network_binary_matrix.png, id=116, 1440.38126pt x 440.64626pt>
 File: img/network_binary_matrix.png Graphic file (type png)
 
 <use img/network_binary_matrix.png>
-Package pdftex.def Info: img/network_binary_matrix.png used on input line 220.
+Package pdftex.def Info: img/network_binary_matrix.png used on input line 250.
 (pdftex.def)             Requested size: 430.00462pt x 131.5427pt.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<img/moralized_graph.png, id=90, 1441.385pt x 702.625pt>
+<img/moralized_graph.png, id=117, 1441.385pt x 702.625pt>
 File: img/moralized_graph.png Graphic file (type png)
 
 <use img/moralized_graph.png>
-Package pdftex.def Info: img/moralized_graph.png used on input line 226.
+Package pdftex.def Info: img/moralized_graph.png used on input line 256.
 (pdftex.def)             Requested size: 430.00462pt x 209.60979pt.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<img/after_x4_elimination.png, id=91, 720.6925pt x 698.61pt>
+<img/after_x4_elimination.png, id=118, 720.6925pt x 698.61pt>
 File: img/after_x4_elimination.png Graphic file (type png)
 
 <use img/after_x4_elimination.png>
-Package pdftex.def Info: img/after_x4_elimination.png used on input line 232.
+Package pdftex.def Info: img/after_x4_elimination.png used on input line 262.
 (pdftex.def)             Requested size: 430.00462pt x 416.82405pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[4 <./img/network_one_highlighted.png>] [5 <./img/network_binary_matrix.png> <.
-/img/moralized_graph.png>] [6 <./img/after_x4_elimination.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 250.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 250.
-
-(./project_proposal.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 250.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 250.
+ [5 <./img/small_network.png>] [6 <./img/iterative_network.png> <./img/paramete
+rize_network_description.png> <./img/network_one_highlighted.png>] [7 <./img/ne
+twork_binary_matrix.png> <./img/moralized_graph.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 280.
+ [8 <./img/after_x4_elimination.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 280.
+ (./project_proposal.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 280.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 280.
 Package rerunfilecheck Info: File `project_proposal.out' has not changed.
-(rerunfilecheck)             Checksum: 6F85060CF75B7BB0B99C58AF82CB3D01;151.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
+(rerunfilecheck)             Checksum: 3A2005357D5E6DF0EAFE94485871B803;195.
  ) 
 Here is how much of TeX's memory you used:
- 17315 strings out of 493014
- 326249 string characters out of 6133350
- 408363 words of memory out of 5000000
- 20506 multiletter control sequences out of 15000+600000
+ 17342 strings out of 493014
+ 326879 string characters out of 6133350
+ 408560 words of memory out of 5000000
+ 20522 multiletter control sequences out of 15000+600000
  7448 words of font info for 27 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,7n,56p,826b,606s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -783,11 +794,12 @@ r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/
 local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/lo
 cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local
 /texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/
-texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on project_proposal.pdf (6 pages, 374161 bytes).
+texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/te
+xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on project_proposal.pdf (8 pages, 524044 bytes).
 PDF statistics:
- 170 PDF objects out of 1000 (max. 8388607)
- 143 compressed objects within 2 object streams
- 60 named destinations out of 1000 (max. 500000)
- 57 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 203 PDF objects out of 1000 (max. 8388607)
+ 167 compressed objects within 2 object streams
+ 68 named destinations out of 1000 (max. 500000)
+ 80 words of extra memory for PDF output out of 10000 (max. 10000000)
 
