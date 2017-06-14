@@ -2,6 +2,7 @@ package com.idc.computersience.pm.model.reader;
 
 import com.idc.computersience.pm.model.Node;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * @author eladcohen
  */
+@Ignore
 public class JsonReaderTest {
 
     private JsonNodeReader jsonNodeReader = new JsonNodeReader();

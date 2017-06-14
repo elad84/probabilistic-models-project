@@ -6,7 +6,7 @@
 
     <groupId>com.idc.computersience</groupId>
     <artifactId>probabilistic-model</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
