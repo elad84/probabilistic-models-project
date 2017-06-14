@@ -1,6 +1,12 @@
 package com.idc.computersience.pm.service;
 
+import com.idc.computersience.pm.model.BayesianNetwork;
+import com.idc.computersience.pm.model.writer.NetworkWriter;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.idc.computersience.pm.model.Node;
@@ -18,6 +24,12 @@ public class BayesianNetworkService {
     @Autowired
     private NodeReader nodeReader;
 
+    @Autowired
+    private NetworkWriter networkWriter;
+
+    @Value("${app.base.network}")
+    private String baseDir;
+
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(method = RequestMethod.POST, value = "/bayesian/network")
     public @ResponseBody List<Node> createBayesianNetwork(@RequestBody BayesianCreateRequest createRequest){
@@ -28,6 +40,18 @@ public class BayesianNetworkService {
             e.printStackTrace();
         }
         return nodes;
+    }
+
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.POST, value = "/bayesian/network/create")
+    public @ResponseBody ResponseEntity<Boolean> saveNetwork(@RequestBody BayesianNetwork bayesianNetwork){
+        try {
+            networkWriter.writeNetwork(baseDir + bayesianNetwork.getNetworkName(), bayesianNetwork);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 

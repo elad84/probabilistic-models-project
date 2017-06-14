@@ -201,71 +201,36 @@ The main objective of this project is to develop a user-friendly software tool f
     \section{Implementation Demo}\label{sec:demo}
     For a demonstration of the tool, we constructed a Bayesian network with 5 binary random variables, and added dependencies between them (see figure \ref{fig:besian_network}). Figure \ref{fig:besian_network} illustrates that conditional distribution table of variable ($X_4$) is displayed when its vertex in the network is selected via mouse click.\\
 
-    The Binary membership table have two dimensions, one shows all the probability functions one random variable participant in, the second shows all random variables of one probability function. Figure \ref{fig:binary_membership} shows the binary membership table for this network.
+    The binary membership matrix is a 2D table indicating for each random variable $X$ (rows) and each probability table $\Psi$ (columns), whether $\Psi$ involves $X$ (see Figure \ref{fig:binary_membership}).
     Another important feature of the tool is the ability to examine the undirected version of the graph, moralized graph (Figure \ref{fig:moralized_graph}; unit \ref{unit2}).
-    Note that in our network the moralized graph is not chordal, there is a simple cycle of 4 without a chord ($X_1, X_2, X_3, X_4$).
-    Next we can start an elimination process by selecting one vertex in the graph ($X_4$), we can see how it is eliminated from the graph and new edges introduced in the undirected graph representation of the network (figure \ref{fig:elimination}; unit \ref{unit3}). Binary membership table also changed, all probability functions this variable participant in replaced by the new probability function introduced in the elimination.
+    Note that in our network the moralized graph is not chordal, because there is a simple cycle of 4 without a chord ($X_1, X_2, X_3, X_4$).
+    Next we can start an elimination process by selecting one vertex in the graph ($X_4$), we can see how it is eliminated from the graph and new edges introduced in the undirected graph representation of the network (figure \ref{fig:elimination}; unit \ref{unit3}). We can see the elimination also reflects in the binary membership table, all columns involve $X_4$ removed from the table and new $\Psi m_4$ introduced, with $X_4$ neighbors.
 
     \section{Work plan}
-    Next step is implementation of the tool, right now there is a proof of concept of the tool and all screen shots on this proposal taken from there. Implementation of the to will be sequential by the units (unit 1, unit 2 ...), since every unit adds new capabilities to former one. But before all units, we are going to implement the UI to define a Bayesian network.\\ Theoretical and user guide documentation for every unit are written along with the unit implementation.
-
-    This tool have two part, UI and server (support heavy operations on the network). As part of the tool we will use different open source libraries. 
+    As described in \ref{sec:demo} section, we have a proof of concept of the tool. Our first goal is to have a user interface to define a Bayesian network, and then implementing all units sequentially (unit 1, unit 2 etc.). Along with every unit implementation we are going to write a user guide and theoretical documentation. Project timeline:
     \begin{enumerate}
-        \item UI - Using browser for display, so languages are Javascript, CSS, HTML. The open source project we are using to support our tool are: React, Redux, Vis.js (Graph library), DataTables (HTML table library).
-        \item Server - Written in Java. Using Spring boot as framework for DI (dependency injection) and to create executable JAR.
+        \item Unit 1 - Mid May
+        \item Unit 2 - Mid June
+        \item Unit 3 - Mid July
+        \item Unit 4 - Mid September
+        \item Unit 5 - Mid October
+        \item Unit 6 - Mid November
     \end{enumerate}
 
-    This tool will have two predefined networks, the user can use them instead of defining a new network. The structure of the networks are:
+    This tool is build on client-server architecture. The client is used for the user interface, and server for all network computation. In the development process we are going to use open source projects
+
+    %This tool have two part, UI and server (support heavy operations on the network). As part of the tool we will use different open source libraries. 
+    \begin{enumerate}
+        \item Client - user interface application is going to be a browser, so languages used here are Javascript, CSS, HTML. To develop our application that runs in the browser the open source project we are using are React, Redux, Vis.js (Graph library) and DataTables (HTML table library).
+        \item Server - Our server side is written in Java. The open source Java libraries we are using are Jetty (HTTP server and Java servlet container), Spring boot( application framework).
+    \end{enumerate}
+
+    We are going to use two specific networks for demonstration along the different units. The structure of the networks are:
     \begin{enumerate}
         \item Small Bayesian network with 6 random variables. This network is not chordal in it's moralized representation.
-        \begin{figure}[hb!]
-            \includegraphics[width=\textwidth]{img/small_network.png}
-            \centering
-            \caption{Six random variable Bayesian network representation using directed graph}
-            \label{fig:simple_network}
-        \end{figure}
         \item Network with length parameter N, with three variables X, Y, Z, where X and Y dependent on N. Dependencies in the network: $\forall y_i \in Y, i>0 P(y_i | y_{i-1})$, $\forall x_i \in X P(x_i | Y_i, Z)$ figure \ref{fig:parameterized_network}. In figure \ref{fig:parameterize_network_description} we can see the conditional table.
-        \begin{figure}[hb!]
-            \includegraphics[width=\textwidth]{img/iterative_network.png}
-            \centering
-            \caption{Parameterize network}
-            \label{fig:parameterized_network}
-        \end{figure}
-        \begin{figure}[hb!]
-            \includegraphics[width=\textwidth]{img/parameterize_network_description.png}
-            \centering
-            \caption{Parameterize network probability tables}
-            \label{fig:parameterize_network_description}
-        \end{figure}
-    \end{enumerate}
 
-    \begin{figure}[hb!]
-        \includegraphics[width=\textwidth]{img/network_one_highlighted.png}
-        \centering
-        \caption{A simple Bayesian network representation using directed graph}
-        \label{fig:besian_network}
-    \end{figure}
-
-    \begin{figure}[hb!]
-        \includegraphics[width=\linewidth]{img/network_binary_matrix.png}
-        \caption{Showing binary membership table of the network}
-        \label{fig:binary_membership}
-    \end{figure}
-
-    \begin{figure}[hb!]
-        \includegraphics[width=\linewidth]{img/moralized_graph.png}
-        \caption{Moralized Graph representation}
-        \label{fig:moralized_graph}
-    \end{figure}
-
-    \begin{figure}[hb!]
-        \includegraphics[width=\linewidth]{img/after_x4_elimination.png}
-        \caption{After X4 is eliminated from the graph. We can see a new edge was created between X2 and X3. Now X5 node is chosen to be eliminated next}
-        \label{fig:elimination}
-    \end{figure}
-
-    % \newpage
-    \begin{thebibliography}{5}
+        \begin{thebibliography}{5}
         \bibitem{KevinMurphy}
         Kevin Murphy, PGM Matlab libraries, \\\texttt{http://www.cs.ubc.ca/\~{}murphyk/Software/}
         \bibitem{Hidden Markov Model Toolbox}
@@ -277,4 +242,53 @@ The main objective of this project is to develop a user-friendly software tool f
         \bibitem{MAPEstimation}
         Mark Schmidt and Kevin Murphy, MAP estimation  of DAG structures, \\\texttt{http://www.cs.ubc.ca/~murphyk/Software/DAGlearn/index.html}
     \end{thebibliography}
+
+    \begin{figure}[bp]
+        \includegraphics[width=\textwidth]{img/network_one_highlighted.png}
+        \centering
+        \caption{A simple Bayesian network representation using directed graph}
+        \label{fig:besian_network}
+    \end{figure}
+
+    \begin{figure}[bp]
+        \includegraphics[width=\linewidth]{img/network_binary_matrix.png}
+        \caption{Showing binary membership table of the network}
+        \label{fig:binary_membership}
+    \end{figure}
+
+    \begin{figure}[bp]
+        \includegraphics[width=\linewidth]{img/moralized_graph.png}
+        \caption{Moralized Graph representation}
+        \label{fig:moralized_graph}
+    \end{figure}
+
+    \begin{figure}[bp]
+        \includegraphics[width=\linewidth]{img/after_x4_elimination.png}
+        \caption{After X4 is eliminated from the graph. We can see a new edge was created between X2 and X3. Now X5 node is chosen to be eliminated next}
+        \label{fig:elimination}
+    \end{figure}
+
+    \begin{figure}[bp]
+            \includegraphics[width=\textwidth]{img/small_network.png}
+            \centering
+            \caption{Six random variable Bayesian network representation using directed graph}
+            \label{fig:simple_network}
+        \end{figure}
+
+        \begin{figure}[bp]
+            \includegraphics[width=\textwidth]{img/iterative_network.png}
+            \centering
+            \caption{Parameterize network}
+            \label{fig:parameterized_network}
+        \end{figure}
+        \begin{figure}[bp]
+            \includegraphics[width=\textwidth]{img/parameterize_network_description.png}
+            \centering
+            \caption{Parameterize network probability tables}
+            \label{fig:parameterize_network_description}
+        \end{figure}
+    \end{enumerate}
+
+    % \newpage
+    
 \end{document}
