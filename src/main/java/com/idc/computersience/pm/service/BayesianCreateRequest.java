@@ -1,5 +1,6 @@
 package com.idc.computersience.pm.service;
 
+import com.idc.computersience.pm.model.BayesianNetwork;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,6 @@ import lombok.Setter;
 @Setter
 public class BayesianCreateRequest {
 
-    private String networkName;
     private String filePath;
+    private BayesianNetwork network;
 }

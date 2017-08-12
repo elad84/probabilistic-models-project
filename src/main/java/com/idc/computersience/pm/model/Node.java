@@ -12,8 +12,9 @@ import java.util.List;
 @Setter
 public class Node {
     private Integer nodeId;
+    private boolean controlNode = false;
     private String displayName;
-    private List<Double> domain;
+    private List<NodeDomain> domain;
     private List<Integer> parentList;
     private List<NodeValueConditionalProb> conditionalTable;
 }
