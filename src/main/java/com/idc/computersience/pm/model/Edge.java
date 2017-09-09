@@ -13,11 +13,11 @@ import lombok.Setter;
 @Getter
 public class Edge {
 
-    private int nodeId1;
-    private int nodeId2;
-    private int nodeArrowHead;
+    private String nodeId1;
+    private String nodeId2;
+    private String nodeArrowHead;
 
-    Edge(int node1, int node2, int nodeArrowHead){
+    Edge(String node1, String node2, String nodeArrowHead){
         this.nodeId1 = node1;
         this.nodeId2 = node2;
         this.nodeArrowHead = nodeArrowHead;
@@ -30,29 +30,29 @@ public class Edge {
 
     public static class EdgeBuilder{
 
-        private int nodeId1;
-        private int nodeId2;
-        private int nodeArrowHead;
+        private String nodeId1;
+        private String nodeId2;
+        private String nodeArrowHead;
 
-        public EdgeBuilder setNode1(int nodeId1){
+        public EdgeBuilder setNode1(String nodeId1){
             this.nodeId1 = nodeId1;
             return this;
         }
 
-        public EdgeBuilder setNode2(int nodeId2){
+        public EdgeBuilder setNode2(String nodeId2){
             this.nodeId2 = nodeId2;
             return this;
         }
 
-        public EdgeBuilder setNodeArrowHead(int nodeArrowHead){
+        public EdgeBuilder setNodeArrowHead(String nodeArrowHead){
             this.nodeArrowHead = nodeArrowHead;
             return this;
         }
 
         public Edge build(){
-            if(nodeId1 < 1 || nodeId2 < 1){
-                throw new IllegalArgumentException("cannot create edge without 2 nodes, node id must be greater than 0");
-            }
+//            if(nodeId1 < 1 || nodeId2 < 1){
+//                throw new IllegalArgumentException("cannot create edge without 2 nodes, node id must be greater than 0");
+//            }
             return new Edge(nodeId1, nodeId2, nodeArrowHead);
         }
 

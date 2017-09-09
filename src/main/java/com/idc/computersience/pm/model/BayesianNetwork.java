@@ -11,7 +11,8 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(exclude={"nodes", "edges"})
 public class BayesianNetwork {
-    private String networkName;
+    private NetworkType type;
+    private String name;
     private List<Node> nodes;
     private List<Edge> edges;
 }

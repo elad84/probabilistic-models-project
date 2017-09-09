@@ -11,10 +11,10 @@ import java.util.List;
 @Getter
 @Setter
 public class Node {
-    private Integer nodeId;
+    private String nodeId;
     private boolean controlNode = false;
     private String displayName;
     private List<NodeDomain> domain;
-    private List<Integer> parentList;
+    private List<String> parentList;
     private List<NodeValueConditionalProb> conditionalTable;
 }

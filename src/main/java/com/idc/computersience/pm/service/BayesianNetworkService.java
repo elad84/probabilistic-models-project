@@ -61,9 +61,9 @@ public class BayesianNetworkService {
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST, value = "/bayesian/network/create")
-    public @ResponseBody ResponseEntity<Boolean> saveNetwork(@RequestBody BayesianNetwork bayesianNetwork){
+    public @ResponseBody ResponseEntity<Boolean> saveNetwork(@RequestBody BayesianCreateRequest bayesianCreateRequest){
         try {
-            networkWriter.writeNetwork(baseDir + bayesianNetwork.getNetworkName(), bayesianNetwork);
+                networkWriter.writeNetwork(baseDir + bayesianCreateRequest.getFilePath(), bayesianCreateRequest.getNetwork());
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();

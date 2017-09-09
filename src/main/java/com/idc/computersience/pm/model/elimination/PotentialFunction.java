@@ -15,22 +15,22 @@ import java.util.List;
  */
 @Getter
 public class PotentialFunction {
-    private int id;
+    private String id;
 
-    private List<Integer> nodesId = new ArrayList<>();
+    private List<String> nodesId = new ArrayList<>();
     @Setter
     private Node node;
 
-    public PotentialFunction(int id){
+    public PotentialFunction(String id){
         this.id = id;
     }
 
-    public PotentialFunction(int id, List<Integer> nodes){
+    public PotentialFunction(String id, List<String> nodes){
         this.id = id;
         this.nodesId = nodes;
     }
 
-    public void addNode(int nodeId){
+    public void addNode(String nodeId){
         nodesId.add(nodeId);
     }
 

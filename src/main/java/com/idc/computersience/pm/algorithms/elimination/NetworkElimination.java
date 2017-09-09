@@ -18,10 +18,10 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 public class NetworkElimination {
-    private Map<Integer, List<PotentialFunction>> nodePotentials;
-    private List<Integer> eliminationOrder;
+    private Map<String, List<PotentialFunction>> nodePotentials;
+    private List<String> eliminationOrder;
 
-    public void init(BayesianNetwork bayesianNetwork, List<Integer> eliminationOrder){
+    public void init(BayesianNetwork bayesianNetwork, List<String> eliminationOrder){
         List<PotentialFunction> potentialFunctions;
 
         //iterate over all the nodes and create potential functions
@@ -57,10 +57,10 @@ public class NetworkElimination {
             log.info("no more nodes to eliminate");
         }
 
-        int nextNode = eliminationOrder.remove(0);
+        String nextNode = eliminationOrder.remove(0);
         List<PotentialFunction> nodePotentialFunctions = nodePotentials.get(nextNode);
 
-        List<Integer> nodeNeighbors = nodePotentialFunctions.stream().flatMap(node -> node.getNodesId().stream()).distinct().collect(Collectors.toList());
+        List<String> nodeNeighbors = nodePotentialFunctions.stream().flatMap(node -> node.getNodesId().stream()).distinct().collect(Collectors.toList());
 
         val newPotential = new PotentialFunction(nextNode, nodeNeighbors);
 
@@ -80,17 +80,17 @@ public class NetworkElimination {
 
     private static class PotentialFunctionComparator implements Comparator<PotentialFunction>{
 
-        private int primaryId;
+        private String primaryId;
 
-        PotentialFunctionComparator(int primaryId){
+        PotentialFunctionComparator(String primaryId){
             this.primaryId = primaryId;
         }
 
         @Override
         public int compare(PotentialFunction o1, PotentialFunction o2) {
-            if(o1.getId() == primaryId){
+            if(o1.getId().equals(primaryId) ){
                 return -1;
-            }else if(o2.getId() == primaryId){
+            }else if(o2.getId().equals(primaryId)){
                 return 1;
             }
             return 0;

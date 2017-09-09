@@ -39,7 +39,7 @@ public class NetworkGenerator {
             //create edges
             for(Node node : nodes){
                 if(node.getParentList() != null && !node.getParentList().isEmpty()){
-                    for(int dependency : node.getParentList()){
+                    for(String dependency : node.getParentList()){
                         Edge edge = Edge.newBuilder()
                                 .setNode1(node.getNodeId())
                                 .setNode2(dependency)
@@ -51,7 +51,7 @@ public class NetworkGenerator {
             }
 
             BayesianNetwork bayesianNetwork = new BayesianNetwork();
-            bayesianNetwork.setNetworkName(networkName);
+            bayesianNetwork.setName(networkName);
             bayesianNetwork.setNodes(nodes);
             bayesianNetwork.setEdges(new ArrayList<>(edges));
 
