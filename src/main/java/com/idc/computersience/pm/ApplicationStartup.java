@@ -17,7 +17,7 @@ public class ApplicationStartup {
     public static void main(String[] args) throws Exception{
         ApplicationContext ctx = SpringApplication.run(ApplicationStartup.class, args);
 
-        String url = "http://localhost:8888";
+        String url = "http://localhost:8090";
         if(Desktop.isDesktopSupported()) {
             Desktop.getDesktop().browse(new URI(url));
         }else{
