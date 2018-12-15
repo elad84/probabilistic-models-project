@@ -6,6 +6,7 @@ import com.idc.computersience.pm.model.Node;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -17,6 +18,7 @@ import java.util.Optional;
 /**
  * @author eladcohen
  */
+@Ignore
 @Slf4j
 public class BayesianNetworkTest {
 
