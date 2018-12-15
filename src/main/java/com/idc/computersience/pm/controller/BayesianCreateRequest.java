@@ -1,4 +1,4 @@
-package com.idc.computersience.pm.service;
+package com.idc.computersience.pm.controller;
 
 import com.idc.computersience.pm.model.BayesianNetwork;
 import lombok.Getter;

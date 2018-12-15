@@ -1,7 +1,8 @@
-package com.idc.computersience.pm.model;
+package com.idc.computersience.pm.controller.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.EqualsAndHashCode;
+import com.idc.computersience.pm.model.NodeDomain;
+import com.idc.computersience.pm.model.NodeValueConditionalProb;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,18 +13,13 @@ import java.util.List;
  * @author eladcohen
  */
 @ToString
-@EqualsAndHashCode(of = {"nodeId"})
 @Getter
 @Setter
-public class Node {
+public class NodeDto {
     private String nodeId;
     private boolean controlNode = false;
     private String displayName;
     private List<NodeDomain> domain;
-    private List<String> parentList;
-    @JsonIgnore
-    private List<String> childrenList;
-    @JsonIgnore
     private boolean visited;
     private List<NodeValueConditionalProb> conditionalTable;
 }

@@ -3,24 +3,33 @@ package com.idc.computersience.pm.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Representation of an edge
  *
  * @author eladcohen
  */
+@ToString
 @NoArgsConstructor
 @Getter
 public class Edge {
 
     private String nodeId1;
     private String nodeId2;
+    private boolean directed;
     private String nodeArrowHead;
 
     Edge(String node1, String node2, String nodeArrowHead){
         this.nodeId1 = node1;
         this.nodeId2 = node2;
         this.nodeArrowHead = nodeArrowHead;
+    }
+
+    public Edge(String nodeId1, String nodeId2, boolean directed) {
+        this.nodeId1 = nodeId1;
+        this.nodeId2 = nodeId2;
+        this.directed = directed;
     }
 
     public static EdgeBuilder newBuilder(){
