@@ -36,7 +36,7 @@ public class ApplicationStartup {
                     +  chooser.getSelectedFile());
         }
 
-        String url = "http://localhost:8091";
+        String url = "http://localhost:8080";
 //        String url = "http://localhost:3002";
         if(Desktop.isDesktopSupported()) {
             Desktop.getDesktop().browse(new URI(url));

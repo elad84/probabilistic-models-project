@@ -1,12 +1,12 @@
 package com.idc.computersience.pm.controller;
 
-import com.google.common.graph.Graph;
-import com.google.common.graph.MutableNetwork;
 import com.idc.computersience.pm.algorithms.UndirectedGraphAlgorithm;
 import com.idc.computersience.pm.cache.PathChooser;
 import com.idc.computersience.pm.controller.model.BayesianNetworkDto;
 import com.idc.computersience.pm.controller.model.EdgeDto;
 import com.idc.computersience.pm.controller.model.NodeDto;
+import com.idc.computersience.pm.controller.model.undirected.LeanGraph;
+import com.idc.computersience.pm.controller.model.undirected.MoralizedEdges;
 import com.idc.computersience.pm.model.BayesianNetwork;
 import com.idc.computersience.pm.model.Node;
 import com.idc.computersience.pm.model.reader.NetworkReader;
@@ -71,6 +71,7 @@ public class BayesianNetworkController {
         ResponseEntity<BayesianNetwork> response;
         try{
             BayesianNetwork bayesianNetwork = networkReader.read(baseDir + path);
+            bayesianNetwork.setFileName(path);
             response = new ResponseEntity<>(bayesianNetwork, HttpStatus.OK);
         }catch (Exception e){
             response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -136,13 +137,11 @@ public class BayesianNetworkController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/bayesian/moralized")
-    public @ResponseBody ResponseEntity<Graph<String>> toMoralized(@RequestParam(value = "name") String path){
+    public @ResponseBody ResponseEntity<MoralizedEdges> toMoralized(@RequestParam(value = "name") String path){
         try{
-            BayesianNetwork bayesianNetwork = networkReader.read(baseDir + path);
-            val grpah = undirectedGraphAlgorithm.toMorilized(bayesianNetwork);
-            val toString = grpah.asGraph();
-            System.out.println(toString);
-            return new ResponseEntity<>(grpah.asGraph(), HttpStatus.OK);
+            BayesianNetwork bayesianNetwork = networkReader.read(baseDir + path.toLowerCase());
+            val grpah = undirectedGraphAlgorithm.getMoralized(bayesianNetwork);
+            return new ResponseEntity<>(MoralizedEdges.builder().edges(grpah.edges()).build(), HttpStatus.OK);
         }catch(Exception e){
             log.error("failed to convert bayesian network to moralized", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -154,9 +153,19 @@ public class BayesianNetworkController {
     public @ResponseBody ResponseEntity<Boolean> isChordal(@RequestParam(value = "name") String path){
         try{
             BayesianNetwork bayesianNetwork = networkReader.read(baseDir + path);
-            return new ResponseEntity<>(undirectedGraphAlgorithm.isCordal(bayesianNetwork), HttpStatus.OK);
+            return new ResponseEntity<>(undirectedGraphAlgorithm.isChordal(bayesianNetwork), HttpStatus.OK);
         }catch(Exception e){
             log.error("failed to convert bayesian network to moralized", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/undirected/eliminate/{node2Eliminate}")
+    public @ResponseBody ResponseEntity<LeanGraph> eliminateNode(@RequestBody LeanGraph graph, @PathVariable("node2Eliminate") String node2Eliminate) {
+        try{
+            return new ResponseEntity<>(undirectedGraphAlgorithm.eliminateNode(graph, node2Eliminate), HttpStatus.OK);
+        }catch (Exception e){
+            log.error("failed to eliminate node", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

@@ -17,6 +17,7 @@ public class BayesianNetwork {
     private String name;
     private List<Node> nodes;
     private List<Edge> edges;
+    private String fileName;
 
     public Collection<DepedencyEdge> findDependent(Node root, Set<String> observedNodes){
         val ancestorZ = new HashSet<Node>();
