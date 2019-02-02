@@ -6,7 +6,8 @@ import lombok.Setter;
 import lombok.val;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Represent a potential function
@@ -17,7 +18,8 @@ import java.util.List;
 public class PotentialFunction {
     private String id;
 
-    private List<String> nodesId = new ArrayList<>();
+    /** Nodes part of this potential function*/
+    private Set<String> nodesId = new HashSet<>();
     @Setter
     private Node node;
 
@@ -25,7 +27,7 @@ public class PotentialFunction {
         this.id = id;
     }
 
-    public PotentialFunction(String id, List<String> nodes){
+    public PotentialFunction(String id, Set<String> nodes){
         this.id = id;
         this.nodesId = nodes;
     }

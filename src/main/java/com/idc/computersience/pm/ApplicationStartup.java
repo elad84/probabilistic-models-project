@@ -1,5 +1,6 @@
 package com.idc.computersience.pm;
 
+import com.idc.computersience.pm.cache.PathChooser;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -9,6 +10,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 
@@ -20,7 +22,6 @@ public class ApplicationStartup {
 
     public static void main(String[] args) throws Exception{
         ConfigurableApplicationContext context = new SpringApplicationBuilder(ApplicationStartup.class).headless(false).run(args);
-//        ApplicationContext ctx = SpringApplication.run(ApplicationStartup.class, args);
 
         JFileChooser chooser = new JFileChooser();
         chooser.setCurrentDirectory(FileSystemView.getFileSystemView().getHomeDirectory());
@@ -34,6 +35,9 @@ public class ApplicationStartup {
                     +  chooser.getCurrentDirectory());
             System.out.println("getSelectedFile() : "
                     +  chooser.getSelectedFile());
+            PathChooser chooserBean = context.getBean(PathChooser.class);
+            chooserBean.setNetworkHomeDirectory(chooser.getSelectedFile().getAbsolutePath() + File.separator);
+            System.setProperty("network.path", chooser.getSelectedFile().getAbsolutePath() + File.separator);
         }
 
         String url = "http://localhost:8080";

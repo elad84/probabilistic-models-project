@@ -15,7 +15,6 @@ import com.idc.computersience.pm.model.writer.NetworkWriter;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -35,23 +34,25 @@ import java.util.stream.Collectors;
 @Controller
 public class BayesianNetworkController {
 
-    @Autowired
-    private NodeReader nodeReader;
+    private final NodeReader nodeReader;
 
-    @Autowired
-    private NetworkWriter networkWriter;
+    private final NetworkWriter networkWriter;
 
-    @Autowired
-    private NetworkReader networkReader;
+    private final NetworkReader networkReader;
 
-    @Autowired
-    private PathChooser pathChooser;
+    private final PathChooser pathChooser;
 
-    @Autowired
-    private UndirectedGraphAlgorithm undirectedGraphAlgorithm;
+    private final UndirectedGraphAlgorithm undirectedGraphAlgorithm;
 
-    @Value("${app.base.network}")
-    private String baseDir;
+    public BayesianNetworkController(NodeReader nodeReader, NetworkWriter networkWriter, NetworkReader networkReader, PathChooser pathChooser, UndirectedGraphAlgorithm undirectedGraphAlgorithm) {
+        this.nodeReader = nodeReader;
+        this.networkWriter = networkWriter;
+        this.networkReader = networkReader;
+        this.pathChooser = pathChooser;
+        this.undirectedGraphAlgorithm = undirectedGraphAlgorithm;
+    }
+    //    @Value("${app.base.network}")
+//    private String baseDir;
 
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(method = RequestMethod.POST, value = "/bayesian/network")
@@ -70,7 +71,7 @@ public class BayesianNetworkController {
     public @ResponseBody ResponseEntity<BayesianNetwork> loadNetwork(@RequestParam(value = "name") String path){
         ResponseEntity<BayesianNetwork> response;
         try{
-            BayesianNetwork bayesianNetwork = networkReader.read(baseDir + path);
+            BayesianNetwork bayesianNetwork = networkReader.read(pathChooser.getNetworkHomeDirectory() + path);
             bayesianNetwork.setFileName(path);
             response = new ResponseEntity<>(bayesianNetwork, HttpStatus.OK);
         }catch (Exception e){
@@ -83,7 +84,7 @@ public class BayesianNetworkController {
     @RequestMapping(method = RequestMethod.POST, value = "/bayesian/network/create")
     public @ResponseBody ResponseEntity<Boolean> saveNetwork(@RequestBody BayesianCreateRequest bayesianCreateRequest){
         try {
-                networkWriter.writeNetwork(baseDir + bayesianCreateRequest.getFilePath(), bayesianCreateRequest.getNetwork());
+                networkWriter.writeNetwork(pathChooser.getNetworkHomeDirectory() + bayesianCreateRequest.getFilePath(), bayesianCreateRequest.getNetwork());
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
@@ -101,7 +102,7 @@ public class BayesianNetworkController {
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST, value = "/bayesian/dependency/check")
     public @ResponseBody ResponseEntity<BayesianNetworkDto> checkDependency(@RequestBody BayesianDependency bayesianDependency) throws IOException {
-        BayesianNetwork bayesianNetwork = networkReader.read(baseDir + bayesianDependency.getFileName());
+        BayesianNetwork bayesianNetwork = networkReader.read(pathChooser.getNetworkHomeDirectory() + bayesianDependency.getFileName());
         Optional<Node> rootNode = bayesianNetwork.getNodes().stream().filter(node -> node.getNodeId().equals(bayesianDependency.getRootNodeId())).findFirst();
         if(!rootNode.isPresent()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -139,7 +140,7 @@ public class BayesianNetworkController {
     @RequestMapping(method = RequestMethod.GET, value = "/bayesian/moralized")
     public @ResponseBody ResponseEntity<MoralizedEdges> toMoralized(@RequestParam(value = "name") String path){
         try{
-            BayesianNetwork bayesianNetwork = networkReader.read(baseDir + path.toLowerCase());
+            BayesianNetwork bayesianNetwork = networkReader.read(pathChooser.getNetworkHomeDirectory() + path.toLowerCase());
             val grpah = undirectedGraphAlgorithm.getMoralized(bayesianNetwork);
             return new ResponseEntity<>(MoralizedEdges.builder().edges(grpah.edges()).build(), HttpStatus.OK);
         }catch(Exception e){
@@ -152,7 +153,7 @@ public class BayesianNetworkController {
     @RequestMapping(method = RequestMethod.GET, value = "/bayesian/chordal")
     public @ResponseBody ResponseEntity<Boolean> isChordal(@RequestParam(value = "name") String path){
         try{
-            BayesianNetwork bayesianNetwork = networkReader.read(baseDir + path);
+            BayesianNetwork bayesianNetwork = networkReader.read(pathChooser.getNetworkHomeDirectory() + path);
             return new ResponseEntity<>(undirectedGraphAlgorithm.isChordal(bayesianNetwork), HttpStatus.OK);
         }catch(Exception e){
             log.error("failed to convert bayesian network to moralized", e);
@@ -169,8 +170,4 @@ public class BayesianNetworkController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
-
-
 }

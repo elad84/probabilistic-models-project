@@ -6,10 +6,7 @@ import com.idc.computersience.pm.model.elimination.PotentialFunction;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -60,7 +57,7 @@ public class NetworkElimination {
         String nextNode = eliminationOrder.remove(0);
         List<PotentialFunction> nodePotentialFunctions = nodePotentials.get(nextNode);
 
-        List<String> nodeNeighbors = nodePotentialFunctions.stream().flatMap(node -> node.getNodesId().stream()).distinct().collect(Collectors.toList());
+        Set<String> nodeNeighbors = nodePotentialFunctions.stream().flatMap(node -> node.getNodesId().stream()).collect(Collectors.toSet());
 
         val newPotential = new PotentialFunction(nextNode, nodeNeighbors);
 

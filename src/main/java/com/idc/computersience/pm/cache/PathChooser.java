@@ -1,5 +1,7 @@
 package com.idc.computersience.pm.cache;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +17,10 @@ public class PathChooser {
     private JFrame frame = new JFrame("JFrame Example");
 
     private JFileChooser chooser = new JFileChooser();
+
+    @Getter
+    @Setter
+    private String networkHomeDirectory;
 
     @PostConstruct
     public void post(){
