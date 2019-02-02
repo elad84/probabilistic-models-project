@@ -181,12 +181,4 @@ public class UndirectedGraphAlgorithm {
 
         return perfectElimination.build();
     }
-
-    public static void main(String[] args) {
-        Stream<String> stream = Stream.of("1", "2", "3", "1");
-        System.out.println(stream.map(value -> Integer.valueOf(value)).filter(value -> {
-            System.out.println("running filter function");
-            return value.equals(1);
-        }).findFirst());
-    }
 }
