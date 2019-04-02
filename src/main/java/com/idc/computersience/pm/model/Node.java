@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class Node {
     private boolean controlNode = false;
     private String displayName;
     private List<NodeDomain> domain;
-    private List<String> parentList;
+    private List<String> parentList = new ArrayList<>();
     @JsonIgnore
     private List<String> childrenList;
     @JsonIgnore

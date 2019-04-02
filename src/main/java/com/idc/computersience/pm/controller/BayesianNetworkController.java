@@ -4,6 +4,7 @@ import com.idc.computersience.pm.algorithms.UndirectedGraphAlgorithm;
 import com.idc.computersience.pm.cache.PathChooser;
 import com.idc.computersience.pm.controller.model.BayesianNetworkDto;
 import com.idc.computersience.pm.controller.model.EdgeDto;
+import com.idc.computersience.pm.controller.model.GraphData;
 import com.idc.computersience.pm.controller.model.NodeDto;
 import com.idc.computersience.pm.controller.model.undirected.LeanGraph;
 import com.idc.computersience.pm.controller.model.undirected.MoralizedEdges;
@@ -14,7 +15,6 @@ import com.idc.computersience.pm.model.reader.NodeReader;
 import com.idc.computersience.pm.model.writer.NetworkWriter;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -93,16 +93,24 @@ public class BayesianNetworkController {
     }
 
     @CrossOrigin
-    @RequestMapping(method = RequestMethod.GET, value = "/bayesian/choose")
+    @RequestMapping(method = RequestMethod.GET, value = "/general/choose")
     public @ResponseBody ResponseEntity<Boolean> openFileChooser(){
         pathChooser.choseFile();
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
     @CrossOrigin
+    @RequestMapping(method = RequestMethod.GET, value = "/general")
+    public @ResponseBody ResponseEntity<GraphData> getData() {
+        val data = GraphData.builder().folderPath(pathChooser.getNetworkHomeDirectory()).build();
+        return new ResponseEntity<>(data, HttpStatus.OK);
+    }
+
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.POST, value = "/bayesian/dependency/check")
     public @ResponseBody ResponseEntity<BayesianNetworkDto> checkDependency(@RequestBody BayesianDependency bayesianDependency) throws IOException {
-        BayesianNetwork bayesianNetwork = networkReader.read(pathChooser.getNetworkHomeDirectory() + bayesianDependency.getFileName());
+        BayesianNetwork bayesianNetwork = bayesianDependency.getNetwork();
+//        BayesianNetwork bayesianNetwork = networkReader.read(pathChooser.getNetworkHomeDirectory() + bayesianDependency.getFileName());
         Optional<Node> rootNode = bayesianNetwork.getNodes().stream().filter(node -> node.getNodeId().equals(bayesianDependency.getRootNodeId())).findFirst();
         if(!rootNode.isPresent()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

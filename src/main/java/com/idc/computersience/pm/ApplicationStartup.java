@@ -27,7 +27,11 @@ public class ApplicationStartup {
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         chooser.setAcceptAllFileFilterUsed(false);
 
-        int returnVal = chooser.showOpenDialog(null);
+        JFrame frame = new JFrame("JFrame Example");
+
+        JOptionPane.showMessageDialog(frame, "Please choose the root folder for save/load networks");
+
+        int returnVal = chooser.showOpenDialog(frame);
         if(returnVal == JFileChooser.APPROVE_OPTION) {
             System.out.println("getCurrentDirectory(): "
                     +  chooser.getCurrentDirectory());
