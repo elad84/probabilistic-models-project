@@ -7,3 +7,9 @@
 .navbar-light .navbar-nav .nav-link {
   color: black;
 }
+
+.graph-component {
+  border: 1px solid lightgray;
+  height: 100%;
+  width: 100%;
+}
