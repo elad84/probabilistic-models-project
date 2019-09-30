@@ -46,6 +46,7 @@ public class UndirectedGraphAlgorithm {
             network.addEdge(head, node, head + "_" + node);
         });
 
+        Set<String> newEdges = new HashSet<>();
 
         network.nodes().stream().forEach(node -> {
             Set<String> predecessors = network.predecessors(node);
@@ -54,6 +55,7 @@ public class UndirectedGraphAlgorithm {
                 leftPredecessors.stream().forEach(leftPredecessor -> {
                     if (!predecessor.equals(leftPredecessor)) {
                         network.addEdge(predecessor, leftPredecessor, predecessor + "_" + leftPredecessor);
+                        newEdges.add(predecessor + "_" + leftPredecessor);
                     }
                 });
                 leftPredecessors.remove(predecessor);
@@ -64,7 +66,9 @@ public class UndirectedGraphAlgorithm {
         network.nodes().stream().forEach(node -> {
             undirected.addNode(node);
             network.successors(node).stream().forEach(successor -> {
-                undirected.addEdge(node, successor, node + "_" + successor);
+                String label = node + "_" + successor;
+                undirected.addEdge(node, successor, node + "_" + successor
+                        + (newEdges.contains(label) || newEdges.contains(successor + "_" + node) ? "_new" : ""));
             });
         });
 

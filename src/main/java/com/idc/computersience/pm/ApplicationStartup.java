@@ -21,39 +21,39 @@ public class ApplicationStartup {
     public static void main(String[] args) throws Exception{
         ConfigurableApplicationContext context = new SpringApplicationBuilder(ApplicationStartup.class).headless(false).run(args);
 
-        JFileChooser chooser = new JFileChooser();
-        chooser.setCurrentDirectory(FileSystemView.getFileSystemView().getHomeDirectory());
-        chooser.setDialogTitle("Choose the network folder");
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        chooser.setAcceptAllFileFilterUsed(false);
+//        JFileChooser chooser = new JFileChooser();
+//        chooser.setCurrentDirectory(FileSystemView.getFileSystemView().getHomeDirectory());
+//        chooser.setDialogTitle("Choose the network folder");
+//        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+//        chooser.setAcceptAllFileFilterUsed(false);
+//
+//        JFrame frame = new JFrame("JFrame Example");
+//
+//        JOptionPane.showMessageDialog(frame, "Please choose the root folder for save/load networks");
+//
+//        int returnVal = chooser.showOpenDialog(frame);
+//        if(returnVal == JFileChooser.APPROVE_OPTION) {
+//            System.out.println("getCurrentDirectory(): "
+//                    +  chooser.getCurrentDirectory());
+//            System.out.println("getSelectedFile() : "
+//                    +  chooser.getSelectedFile());
+//            PathChooser chooserBean = context.getBean(PathChooser.class);
+//            chooserBean.setNetworkHomeDirectory(chooser.getSelectedFile().getAbsolutePath() + File.separator);
+//            System.setProperty("network.path", chooser.getSelectedFile().getAbsolutePath() + File.separator);
+//        }
 
-        JFrame frame = new JFrame("JFrame Example");
-
-        JOptionPane.showMessageDialog(frame, "Please choose the root folder for save/load networks");
-
-        int returnVal = chooser.showOpenDialog(frame);
-        if(returnVal == JFileChooser.APPROVE_OPTION) {
-            System.out.println("getCurrentDirectory(): "
-                    +  chooser.getCurrentDirectory());
-            System.out.println("getSelectedFile() : "
-                    +  chooser.getSelectedFile());
-            PathChooser chooserBean = context.getBean(PathChooser.class);
-            chooserBean.setNetworkHomeDirectory(chooser.getSelectedFile().getAbsolutePath() + File.separator);
-            System.setProperty("network.path", chooser.getSelectedFile().getAbsolutePath() + File.separator);
-        }
-
-        String url = "http://localhost:8080";
-//        String url = "http://localhost:3002";
-        if(Desktop.isDesktopSupported()) {
-            Desktop.getDesktop().browse(new URI(url));
-        }else{
-            Runtime runtime = Runtime.getRuntime();
-            try {
-                runtime.exec("xdg-open " + url);
-            } catch (IOException e) {
-                String Command="open "+url;
-                Process Child=Runtime.getRuntime().exec(Command);
-            }
-        }
+//        String url = "http://localhost:8080";
+////        String url = "http://localhost:3002";
+//        if(Desktop.isDesktopSupported()) {
+//            Desktop.getDesktop().browse(new URI(url));
+//        }else{
+//            Runtime runtime = Runtime.getRuntime();
+//            try {
+//                runtime.exec("xdg-open " + url);
+//            } catch (IOException e) {
+//                String Command="open "+url;
+//                Process Child=Runtime.getRuntime().exec(Command);
+//            }
+//        }
     }
 }
