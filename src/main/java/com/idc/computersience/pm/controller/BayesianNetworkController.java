@@ -91,9 +91,9 @@ public class BayesianNetworkController {
     @RequestMapping(method = RequestMethod.POST, value = "/bayesian/network/create")
     public @ResponseBody ResponseEntity<Boolean> saveNetwork(@RequestBody BayesianCreateRequest bayesianCreateRequest){
         try {
-                String path = pathChooser.getNetworkHomeDirectory().endsWith(File.separator) ?
-                        pathChooser.getNetworkHomeDirectory() : pathChooser.getNetworkHomeDirectory() + File.separator;
-                networkWriter.writeNetwork(path  + bayesianCreateRequest.getFilePath(), bayesianCreateRequest.getNetwork());
+//                String path = pathChooser.getNetworkHomeDirectory().endsWith(File.separator) ?
+//                        pathChooser.getNetworkHomeDirectory() : pathChooser.getNetworkHomeDirectory() + File.separator;
+                networkWriter.writeNetwork(bayesianCreateRequest.getFilePath(), bayesianCreateRequest.getNetwork());
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();

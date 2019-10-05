@@ -1,6 +1,8 @@
 package com.idc.computersience.pm;
 
 import com.idc.computersience.pm.cache.PathChooser;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -15,11 +17,18 @@ import java.net.URI;
 /**
  * @author eladcohen
  */
+@Slf4j
 @SpringBootApplication
 public class ApplicationStartup {
 
-    public static void main(String[] args) throws Exception{
-        ConfigurableApplicationContext context = new SpringApplicationBuilder(ApplicationStartup.class).headless(false).run(args);
+    public static void main(String[] args) {
+        try {
+            SpringApplication.run(ApplicationStartup.class, args);
+        } catch (Exception e) {
+            log.error("Spring application exited with an error");
+            System.exit(15);
+        }
+//        ConfigurableApplicationContext context = new SpringApplicationBuilder(ApplicationStartup.class).headless(false).run(args);
 
 //        JFileChooser chooser = new JFileChooser();
 //        chooser.setCurrentDirectory(FileSystemView.getFileSystemView().getHomeDirectory());
