@@ -36,7 +36,7 @@ public class BayesianNetwork {
         while(!observedCopy.isEmpty()){
             val nextObservedNode = nodesMap.get(observedCopy.remove(0));
 
-            if(!ancestorZ.contains(nextObservedNode) && nextObservedNode.getParentList() != null){
+            if(!ancestorZ.contains(nextObservedNode) && nextObservedNode != null && nextObservedNode.getParentList() != null){
                 observedCopy.addAll(nextObservedNode.getParentList());
             }
             ancestorZ.add(nextObservedNode);
@@ -105,6 +105,9 @@ public class BayesianNetwork {
 
         if(node.getParentList() != null){
             for (String s : node.getParentList()) {
+                if(s == null) {
+                     continue;
+                }
                 if(shouldVisitParents){
                     nodeEdgeMap.get(s + "_" + node.getNodeId()).setCategory(DconnectivityCategory.CONNECTED);
                     dfsVisit(nodesMap.get(s), Direction.OUT, ancestorZ, nodesMap, nodeEdgeMap);
