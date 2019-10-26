@@ -23,6 +23,7 @@ public class BayesianNetwork {
     public Collection<DepedencyEdge> findDependent(Node root, Set<String> observedNodes){
         val ancestorZ = new HashSet<Node>();
         val nodeEdgeMap = new HashMap<String, DepedencyEdge>();
+        // create a node map
         val nodesMap = nodes.stream().map(node -> {
             node.setVisited(false);
             return node;
