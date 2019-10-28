@@ -1,5 +1,6 @@
 package com.idc.computersience.pm.model.reader;
 
+import com.google.common.collect.ImmutableSet;
 import com.idc.computersience.pm.model.BayesianNetwork;
 import com.idc.computersience.pm.model.DepedencyEdge;
 import com.idc.computersience.pm.model.Node;
@@ -14,6 +15,8 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * @author eladcohen
@@ -137,5 +140,23 @@ public class BayesianNetworkTest {
         val dependentNode = bayesianNetwork.getNodes().stream().filter(node -> node.getNodeId().equals("1")).findFirst();
 
         Assert.assertFalse("dependent node should not be visited but was: " + dependentNode.get().isVisited(), dependentNode.get().isVisited());
+    }
+
+    @Test
+    public void testCondition() throws IOException {
+        File file = new File("src/test/resource/Transport.txt");
+        BayesianNetwork bayesianNetwork = networkReader.read(file.getAbsolutePath());
+        Optional<Node> root = bayesianNetwork.getNodes().stream().filter(node -> node.getNodeId().equals("1")).findFirst();
+        val observedNodes = ImmutableSet.of("2");
+        root.ifPresent(rootNode -> bayesianNetwork.findDependent(rootNode, observedNodes));
+
+        val dependentNode = bayesianNetwork.getNodes().stream().filter(node -> node.getNodeId().equals("5")).findFirst();
+        val nodeMap = bayesianNetwork.getNodes().stream().collect(Collectors.toMap(Node::getNodeId, Function.identity()));
+
+        Assert.assertTrue("dependent node should be visited but was not", nodeMap.get("2").isVisited());
+        Assert.assertTrue("dependent node should be visited but was not", nodeMap.get("3").isVisited());
+        Assert.assertTrue("dependent node should be visited but was not", nodeMap.get("4").isVisited());
+        Assert.assertTrue("dependent node should be visited but was not", nodeMap.get("6").isVisited());
+        Assert.assertFalse("dependent node should not be visited but was", nodeMap.get("5").isVisited());
     }
 }

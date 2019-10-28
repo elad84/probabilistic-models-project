@@ -86,7 +86,7 @@ public class BayesianNetwork {
         if(node.getChildrenList() != null){
             for (String s : node.getChildrenList()) {
                 if(shouldVisitChildern){
-                    val edge = nodeEdgeMap.get(s + "_" + node.getNodeId());
+                    val edge = nodeEdgeMap.get(node.getNodeId() + "_" + s);
                     if(edge != null){
                         edge.setCategory(DconnectivityCategory.CONNECTED);
                     }
