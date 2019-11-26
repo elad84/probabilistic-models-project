@@ -1,2 +1,2 @@
-javaw -jar .\probabilistic-model-1.0-SNAPSHOT.jar
+START /B java -jar .\probabilistic-model-1.0-SNAPSHOT.jar
 start "" .\ProbabilisticModel1.exe
